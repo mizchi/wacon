@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/encoding/utf8",
+  "mizchi/zlib",
+}
+
+options(
+  "native-stub": [ "store_native.c" ],
+)

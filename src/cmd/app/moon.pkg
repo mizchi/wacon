@@ -1,0 +1,13 @@
+import {
+  "mizchi/wacon/types",
+  "mizchi/wacon/oci",
+  "mizchi/wacon/registry",
+  "mizchi/wacon/runtime",
+  "mizchi/wacon/store",
+  "moonbitlang/core/env",
+  "moonbitlang/async",
+}
+
+options(
+  "is-main": true,
+)

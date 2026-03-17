@@ -1,0 +1,20 @@
+{
+  "name": "mizchi/wacon",
+  "version": "0.1.0",
+  "deps": {
+    "moonbitlang/async": "0.16.8",
+    "mizchi/zlib": "0.3.3"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/mizchi/wacon",
+  "license": "Apache-2.0",
+  "keywords": [
+    "moonbit",
+    "wasm",
+    "oci",
+    "container"
+  ],
+  "description": "Minimal OCI container runtime for WASM modules",
+  "source": "src",
+  "preferred-target": "native"
+}

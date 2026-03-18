@@ -51,13 +51,6 @@ function _M0TPB6Hasher(param0) {
 const _M0FPB19int__to__string__js = (x, radix) => {
   return x.toString(radix);
 };
-const _M0FPB21int64__to__string__js = (num, radix) => {
-  let val = (BigInt(num.hi >>> 0) << 32n) | BigInt(num.lo >>> 0);
-  if (val & (1n << 63n)) {
-    val = val - (1n << 64n);
-  }
-  return val.toString(radix);
-};
 function $unsafe_bytes_sub_string(bytes, byte_offset, byte_length) {
   const end_offset = byte_offset + byte_length;
   let buf = '';
@@ -340,9 +333,9 @@ const $_2L = { hi: -1, lo: -2 };
 const $1048576L = { hi: 0, lo: 1048576 };
 const $_4096L = { hi: -1, lo: -4096 };
 const $_38L = { hi: -1, lo: -38 };
-const $3L = { hi: 0, lo: 3 };
 const $7L = { hi: 0, lo: 7 };
 const $15L = { hi: 0, lo: 15 };
+const $3L = { hi: 0, lo: 3 };
 const $31L = { hi: 0, lo: 31 };
 const $35L = { hi: 0, lo: 35 };
 const $4095L = { hi: 0, lo: 4095 };
@@ -393,13 +386,13 @@ const _M0FP46mizchi5wacon3cmd4wasm13js__get__argv = () => { return window.__waco
 const $256L = { hi: 0, lo: 256 };
 const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char };
 const _M0FPB19wasm__helper__cache = new _M0TPB15WasmHelperCache(false, undefined);
-const _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190 = $_9223372036854775808L;
-const _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS191 = $9223372036854775807L;
+const _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS218 = $_9223372036854775808L;
+const _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS219 = $9223372036854775807L;
 const _M0FP36mizchi5wacon4rv649pie__base = $4194304L;
-const _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1377 = $1048691L;
+const _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1374 = $1048691L;
 const _M0FPB4seed = _M0FPB12random__seed();
-const _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1053 = { _0: -2, _1: 0, _2: 0 };
-const _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1044 = { _0: -9, _1: 0, _2: 0 };
+const _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1051 = { _0: -2, _1: 0, _2: 0 };
+const _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1042 = { _0: -9, _1: 0, _2: 0 };
 function _M0FPC15abort5abortGuE(msg) {
   $panic();
 }
@@ -939,14 +932,14 @@ function _M0IP016_24default__implPB7Compare6op__gtGmE(x, y) {
 function _M0IP016_24default__implPB7Compare6op__leGkE(x, y) {
   return $compare_int(x, y) <= 0;
 }
+function _M0IP016_24default__implPB7Compare6op__geGkE(x, y) {
+  return $compare_int(x, y) >= 0;
+}
 function _M0IP016_24default__implPB7Compare6op__geGlE(x, y) {
   return _M0IPC15int645Int64PB7Compare7compare(x, y) >= 0;
 }
 function _M0IP016_24default__implPB7Compare6op__geGmE(x, y) {
   return _M0IPC16uint646UInt64PB7Compare7compare(x, y) >= 0;
-}
-function _M0IP016_24default__implPB7Compare6op__geGkE(x, y) {
-  return $compare_int(x, y) >= 0;
 }
 function _M0MPB6Hasher9avalanche(self) {
   let acc = self.acc;
@@ -1035,9 +1028,6 @@ function _M0MPB4Iter4nextGUsiEE(self) {
 }
 function _M0MPC13int3Int18to__string_2einner(self, radix) {
   return _M0FPB19int__to__string__js(self, radix);
-}
-function _M0MPC15int645Int6418to__string_2einner(self, radix) {
-  return _M0FPB21int64__to__string__js(self, radix);
 }
 function _M0FPB19unsafe__sub__string(_tmp, _tmp$2, _tmp$3) {
   return $unsafe_bytes_sub_string(_tmp, _tmp$2, _tmp$3);
@@ -3534,7 +3524,7 @@ function _M0MP36mizchi5wacon3vfs3Vfs5close(self, fd) {
 function _M0MP36mizchi5wacon3vfs3Vfs5fstat(self, fd) {
   const _bind = _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
   if (_bind === undefined) {
-    return _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1044;
+    return _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1042;
   } else {
     const _Some = _bind;
     const _of = _Some;
@@ -3560,7 +3550,7 @@ function _M0MP36mizchi5wacon3vfs3Vfs5fstat(self, fd) {
 function _M0MP36mizchi5wacon3vfs3Vfs4stat(self, path) {
   const _bind = _M0MP36mizchi5wacon3vfs3Vfs7resolve(self, path);
   if (_bind === undefined) {
-    return _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1053;
+    return _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1051;
   } else {
     const _Some = _bind;
     const _idx = _Some;
@@ -4460,9 +4450,6 @@ function _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self) {
   $bound_check(_tmp$5, 10);
   _tmp$5[10] = $0L;
 }
-function _M0FP36mizchi5wacon4rv6414is__compressed(inst) {
-  return _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(inst, $3L), $3L);
-}
 function _M0FP36mizchi5wacon4rv644creg(bits) {
   return _M0IPC15int645Int64PB3Add3add(_M0IPC15int645Int64PB6BitAnd4land(bits, $7L), $8L);
 }
@@ -4721,7 +4708,7 @@ function _M0FP36mizchi5wacon4rv6410expand__q2(inst, funct3) {
       const b12 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 12), $1L);
       const rd$4 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 7), $31L);
       const rs2 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 2), $31L);
-      return _M0IPC15int645Int64PB2Eq5equal(b12, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($0L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl($0L, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20))) : _M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rd$4, $0L) ? _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1377 : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($1L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15))) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20));
+      return _M0IPC15int645Int64PB2Eq5equal(b12, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($0L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl($0L, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20))) : _M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rd$4, $0L) ? _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1374 : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($1L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15))) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20));
     }
     case 6: {
       const rs2$2 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 2), $31L);
@@ -4863,19 +4850,19 @@ function _M0FP36mizchi5wacon4rv649exec__fop(cpu, funct7, funct3, rd, rs1, rs2) {
         case 0: {
           const _tmp$17 = cpu.fpu.regs;
           $bound_check(_tmp$17, rd);
-          _tmp$17[rd] = _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB6BitAnd4land(a$6, _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS191), _M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190));
+          _tmp$17[rd] = _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB6BitAnd4land(a$6, _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS219), _M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS218));
           return;
         }
         case 1: {
           const _tmp$18 = cpu.fpu.regs;
           $bound_check(_tmp$18, rd);
-          _tmp$18[rd] = _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB6BitAnd4land(a$6, _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS191), _M0IPC15int645Int64PB6BitXOr4lxor(_M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190), _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190));
+          _tmp$18[rd] = _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB6BitAnd4land(a$6, _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS219), _M0IPC15int645Int64PB6BitXOr4lxor(_M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS218), _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS218));
           return;
         }
         case 2: {
           const _tmp$19 = cpu.fpu.regs;
           $bound_check(_tmp$19, rd);
-          _tmp$19[rd] = _M0IPC15int645Int64PB6BitXOr4lxor(a$6, _M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190));
+          _tmp$19[rd] = _M0IPC15int645Int64PB6BitXOr4lxor(a$6, _M0IPC15int645Int64PB6BitAnd4land(b$5, _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS218));
           return;
         }
         default: {
@@ -5429,9 +5416,6 @@ function _M0MP36mizchi5wacon4rv643Cpu9exec__csr(self, inst, inst_size) {
   }
   self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
 }
-function _M0FP36mizchi5wacon4rv646opcode(inst) {
-  return _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(inst, $127L));
-}
 function _M0FP36mizchi5wacon4rv642rd(inst) {
   return _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 7), $31L));
 }
@@ -5464,29 +5448,97 @@ function _M0FP36mizchi5wacon4rv646imm__j(inst) {
   const b20 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 31), $1L);
   return _M0FP36mizchi5wacon4rv649sign__ext(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB3Shl3shl(b10_1, 1), _M0IPC15int645Int64PB3Shl3shl(b11, 11)), _M0IPC15int645Int64PB3Shl3shl(b19_12, 12)), _M0IPC15int645Int64PB3Shl3shl(b20, 20)), 20);
 }
-function _M0FP36mizchi5wacon4rv6410exec__m32w(f3, a, b) {
-  const a32 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L));
-  const b32 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L));
-  switch (f3) {
+function _M0FP36mizchi5wacon4rv644ushr(val, n) {
+  return _M0IPC16uint646UInt64PB3Shr3shr(val, n);
+}
+function _M0MP36mizchi5wacon4rv643Cpu12exec__alu__i(self, inst, inst_size) {
+  const imm = _M0FP36mizchi5wacon4rv646imm__i(inst);
+  const _p = _M0FP36mizchi5wacon4rv643rs1(inst);
+  const _tmp = self.regs;
+  $bound_check(_tmp, _p);
+  const src = _tmp[_p];
+  const shamt = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(imm, $63L));
+  const _bind = _M0FP36mizchi5wacon4rv646funct3(inst);
+  let result;
+  switch (_bind) {
     case 0: {
-      return _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Mul3mul(a32, b32), $4294967295L));
+      result = _M0IPC15int645Int64PB3Add3add(src, imm);
+      break;
+    }
+    case 1: {
+      result = _M0IPC15int645Int64PB3Shl3shl(src, shamt);
+      break;
+    }
+    case 2: {
+      result = _M0IP016_24default__implPB7Compare6op__ltGlE(src, imm) ? $1L : $0L;
+      break;
+    }
+    case 3: {
+      result = _M0IP016_24default__implPB7Compare6op__ltGmE(src, imm) ? $1L : $0L;
+      break;
     }
     case 4: {
-      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? $_1L : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Div3div(a32, b32), $4294967295L));
+      result = _M0IPC15int645Int64PB6BitXOr4lxor(src, imm);
+      break;
     }
     case 5: {
-      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? $_1L : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Div3div(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L), _M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L)), $4294967295L));
+      result = _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(_M0FP36mizchi5wacon4rv644ushr(inst, 26), $32L), $0L) ? _M0IPC15int645Int64PB3Shr3shr(src, shamt) : _M0FP36mizchi5wacon4rv644ushr(src, shamt);
+      break;
     }
     case 6: {
-      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Mod3mod(a32, b32), $4294967295L));
+      result = _M0IPC15int645Int64PB5BitOr3lor(src, imm);
+      break;
     }
     case 7: {
-      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Mod3mod(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L), _M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L)), $4294967295L));
+      result = _M0IPC15int645Int64PB6BitAnd4land(src, imm);
+      break;
     }
     default: {
-      return $0L;
+      result = $0L;
     }
   }
+  const _p$2 = _M0FP36mizchi5wacon4rv642rd(inst);
+  if (_p$2 !== 0) {
+    const _tmp$2 = self.regs;
+    $bound_check(_tmp$2, _p$2);
+    _tmp$2[_p$2] = result;
+  }
+  self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+}
+function _M0MP36mizchi5wacon4rv643Cpu13exec__alu__iw(self, inst, inst_size) {
+  const imm = _M0FP36mizchi5wacon4rv646imm__i(inst);
+  const _p = _M0FP36mizchi5wacon4rv643rs1(inst);
+  const _tmp = self.regs;
+  $bound_check(_tmp, _p);
+  const src = _tmp[_p];
+  const shamt = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(imm, $31L));
+  const _bind = _M0FP36mizchi5wacon4rv646funct3(inst);
+  let result;
+  switch (_bind) {
+    case 0: {
+      result = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(src, imm), $4294967295L));
+      break;
+    }
+    case 1: {
+      result = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shl3shl(src, shamt), $4294967295L));
+      break;
+    }
+    case 5: {
+      const w = _M0IPC15int645Int64PB6BitAnd4land(src, $4294967295L);
+      result = _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(_M0FP36mizchi5wacon4rv644ushr(inst, 26), $32L), $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shr3shr(_M0FP36mizchi5wacon4rv646sext32(w), shamt), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0FP36mizchi5wacon4rv644ushr(w, shamt), $4294967295L));
+      break;
+    }
+    default: {
+      result = $0L;
+    }
+  }
+  const _p$2 = _M0FP36mizchi5wacon4rv642rd(inst);
+  if (_p$2 !== 0) {
+    const _tmp$2 = self.regs;
+    $bound_check(_tmp$2, _p$2);
+    _tmp$2[_p$2] = result;
+  }
+  self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
 }
 function _M0FP36mizchi5wacon4rv649exec__m64(f3, a, b) {
   switch (f3) {
@@ -5519,6 +5571,133 @@ function _M0FP36mizchi5wacon4rv649exec__m64(f3, a, b) {
       return $0L;
     }
   }
+}
+function _M0MP36mizchi5wacon4rv643Cpu12exec__alu__r(self, inst, inst_size) {
+  const _p = _M0FP36mizchi5wacon4rv643rs1(inst);
+  const _tmp = self.regs;
+  $bound_check(_tmp, _p);
+  const a = _tmp[_p];
+  const _p$2 = _M0FP36mizchi5wacon4rv643rs2(inst);
+  const _tmp$2 = self.regs;
+  $bound_check(_tmp$2, _p$2);
+  const b = _tmp$2[_p$2];
+  const f7 = _M0FP36mizchi5wacon4rv646funct7(inst);
+  let result;
+  if (f7 === 1) {
+    result = _M0FP36mizchi5wacon4rv649exec__m64(_M0FP36mizchi5wacon4rv646funct3(inst), a, b);
+  } else {
+    const _bind = _M0FP36mizchi5wacon4rv646funct3(inst);
+    switch (_bind) {
+      case 0: {
+        result = f7 === 32 ? _M0IPC15int645Int64PB3Sub3sub(a, b) : _M0IPC15int645Int64PB3Add3add(a, b);
+        break;
+      }
+      case 1: {
+        result = _M0IPC15int645Int64PB3Shl3shl(a, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $63L)));
+        break;
+      }
+      case 2: {
+        result = _M0IP016_24default__implPB7Compare6op__ltGlE(a, b) ? $1L : $0L;
+        break;
+      }
+      case 3: {
+        result = _M0IP016_24default__implPB7Compare6op__ltGmE(a, b) ? $1L : $0L;
+        break;
+      }
+      case 4: {
+        result = _M0IPC15int645Int64PB6BitXOr4lxor(a, b);
+        break;
+      }
+      case 5: {
+        result = f7 === 32 ? _M0IPC15int645Int64PB3Shr3shr(a, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $63L))) : _M0FP36mizchi5wacon4rv644ushr(a, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $63L)));
+        break;
+      }
+      case 6: {
+        result = _M0IPC15int645Int64PB5BitOr3lor(a, b);
+        break;
+      }
+      case 7: {
+        result = _M0IPC15int645Int64PB6BitAnd4land(a, b);
+        break;
+      }
+      default: {
+        result = $0L;
+      }
+    }
+  }
+  const _p$3 = _M0FP36mizchi5wacon4rv642rd(inst);
+  if (_p$3 !== 0) {
+    const _tmp$3 = self.regs;
+    $bound_check(_tmp$3, _p$3);
+    _tmp$3[_p$3] = result;
+  }
+  self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+}
+function _M0FP36mizchi5wacon4rv6410exec__m32w(f3, a, b) {
+  const a32 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L));
+  const b32 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L));
+  switch (f3) {
+    case 0: {
+      return _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Mul3mul(a32, b32), $4294967295L));
+    }
+    case 4: {
+      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? $_1L : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Div3div(a32, b32), $4294967295L));
+    }
+    case 5: {
+      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? $_1L : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Div3div(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L), _M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L)), $4294967295L));
+    }
+    case 6: {
+      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Mod3mod(a32, b32), $4294967295L));
+    }
+    case 7: {
+      return _M0IPC15int645Int64PB2Eq5equal(b32, $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Mod3mod(_M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L), _M0IPC15int645Int64PB6BitAnd4land(b, $4294967295L)), $4294967295L));
+    }
+    default: {
+      return $0L;
+    }
+  }
+}
+function _M0MP36mizchi5wacon4rv643Cpu13exec__alu__rw(self, inst, inst_size) {
+  const _p = _M0FP36mizchi5wacon4rv643rs1(inst);
+  const _tmp = self.regs;
+  $bound_check(_tmp, _p);
+  const a = _tmp[_p];
+  const _p$2 = _M0FP36mizchi5wacon4rv643rs2(inst);
+  const _tmp$2 = self.regs;
+  $bound_check(_tmp$2, _p$2);
+  const b = _tmp$2[_p$2];
+  const f7 = _M0FP36mizchi5wacon4rv646funct7(inst);
+  let result;
+  if (f7 === 1) {
+    result = _M0FP36mizchi5wacon4rv6410exec__m32w(_M0FP36mizchi5wacon4rv646funct3(inst), a, b);
+  } else {
+    const _bind = _M0FP36mizchi5wacon4rv646funct3(inst);
+    switch (_bind) {
+      case 0: {
+        result = f7 === 32 ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Sub3sub(a, b), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(a, b), $4294967295L));
+        break;
+      }
+      case 1: {
+        result = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shl3shl(a, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $31L))), $4294967295L));
+        break;
+      }
+      case 5: {
+        const w = _M0IPC15int645Int64PB6BitAnd4land(a, $4294967295L);
+        result = f7 === 32 ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shr3shr(_M0FP36mizchi5wacon4rv646sext32(w), _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $31L))), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0FP36mizchi5wacon4rv644ushr(w, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b, $31L))), $4294967295L));
+        break;
+      }
+      default: {
+        result = $0L;
+      }
+    }
+  }
+  const _p$3 = _M0FP36mizchi5wacon4rv642rd(inst);
+  if (_p$3 !== 0) {
+    const _tmp$3 = self.regs;
+    $bound_check(_tmp$3, _p$3);
+    _tmp$3[_p$3] = result;
+  }
+  self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
 }
 function _M0FP36mizchi5wacon4rv6415exec__atomic__d(cpu, funct5, rd, addr, src) {
   const old = _M0MP36mizchi5wacon4rv643Cpu9load__u64(cpu, addr);
@@ -5760,468 +5939,312 @@ function _M0MP36mizchi5wacon4rv643Cpu12exec__atomic(self, inst, inst_size) {
   }
   self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
 }
-function _M0MP36mizchi5wacon4rv643Cpu4step(self) {
-  if (self.halted) {
-    return false;
-  }
-  const raw = _M0MP36mizchi5wacon4rv643Cpu9load__u32(self, self.pc);
-  if (_M0IPC15int645Int64PB2Eq5equal(raw, $0L)) {
-    self.halted = true;
-    return false;
-  }
-  let _bind;
-  if (_M0FP36mizchi5wacon4rv6414is__compressed(raw)) {
-    const compressed = _M0IPC15int645Int64PB6BitAnd4land(raw, $65535L);
-    const _bind$2 = _M0FP36mizchi5wacon4rv6418expand__compressed(compressed);
-    if (_bind$2 === undefined) {
-      self.halted = true;
-      return false;
-    } else {
-      const _Some = _bind$2;
-      const _expanded = _Some;
-      _bind = { _0: $2L, _1: _expanded };
-    }
-  } else {
-    _bind = { _0: $4L, _1: raw };
-  }
-  const _inst_size = _bind._0;
-  const _inst = _bind._1;
-  const op = _M0FP36mizchi5wacon4rv646opcode(_inst);
-  switch (op) {
-    case 55: {
-      const _p = _M0FP36mizchi5wacon4rv642rd(_inst);
-      const _p$2 = _M0FP36mizchi5wacon4rv646imm__u(_inst);
-      if (_p !== 0) {
-        const _tmp = self.regs;
-        $bound_check(_tmp, _p);
-        _tmp[_p] = _p$2;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 23: {
-      const _p$3 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      const _p$4 = _M0IPC15int645Int64PB3Add3add(self.pc, _M0FP36mizchi5wacon4rv646imm__u(_inst));
-      if (_p$3 !== 0) {
-        const _tmp = self.regs;
-        $bound_check(_tmp, _p$3);
-        _tmp[_p$3] = _p$4;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 111: {
-      const _p$5 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      const _p$6 = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      if (_p$5 !== 0) {
-        const _tmp = self.regs;
-        $bound_check(_tmp, _p$5);
-        _tmp[_p$5] = _p$6;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _M0FP36mizchi5wacon4rv646imm__j(_inst));
-      break;
-    }
-    case 103: {
-      const _p$7 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp = self.regs;
-      $bound_check(_tmp, _p$7);
-      const target = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(_tmp[_p$7], _M0FP36mizchi5wacon4rv646imm__i(_inst)), $_2L);
-      const _p$8 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      const _p$9 = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      if (_p$8 !== 0) {
-        const _tmp$2 = self.regs;
-        $bound_check(_tmp$2, _p$8);
-        _tmp$2[_p$8] = _p$9;
-      }
-      self.pc = target;
-      break;
-    }
-    case 99: {
-      const _p$10 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$2 = self.regs;
-      $bound_check(_tmp$2, _p$10);
-      const a = _tmp$2[_p$10];
-      const _p$11 = _M0FP36mizchi5wacon4rv643rs2(_inst);
-      const _tmp$3 = self.regs;
-      $bound_check(_tmp$3, _p$11);
-      const b = _tmp$3[_p$11];
-      const _bind$2 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-      let taken;
-      switch (_bind$2) {
-        case 0: {
-          taken = _M0IPC15int645Int64PB2Eq5equal(a, b);
+function _M0MP36mizchi5wacon4rv643Cpu8dispatch(self, op, inst, inst_size) {
+  _L: {
+    _L$2: {
+      switch (op) {
+        case 55: {
+          const _p = _M0FP36mizchi5wacon4rv642rd(inst);
+          const _p$2 = _M0FP36mizchi5wacon4rv646imm__u(inst);
+          if (_p !== 0) {
+            const _tmp = self.regs;
+            $bound_check(_tmp, _p);
+            _tmp[_p] = _p$2;
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
           break;
         }
-        case 1: {
-          taken = _M0IP016_24default__implPB2Eq10not__equalGlE(a, b);
+        case 23: {
+          const _p$3 = _M0FP36mizchi5wacon4rv642rd(inst);
+          const _p$4 = _M0IPC15int645Int64PB3Add3add(self.pc, _M0FP36mizchi5wacon4rv646imm__u(inst));
+          if (_p$3 !== 0) {
+            const _tmp = self.regs;
+            $bound_check(_tmp, _p$3);
+            _tmp[_p$3] = _p$4;
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
           break;
         }
-        case 4: {
-          taken = _M0IP016_24default__implPB7Compare6op__ltGlE(a, b);
+        case 111: {
+          const _p$5 = _M0FP36mizchi5wacon4rv642rd(inst);
+          const _p$6 = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+          if (_p$5 !== 0) {
+            const _tmp = self.regs;
+            $bound_check(_tmp, _p$5);
+            _tmp[_p$5] = _p$6;
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _M0FP36mizchi5wacon4rv646imm__j(inst));
           break;
         }
-        case 5: {
-          taken = _M0IP016_24default__implPB7Compare6op__geGlE(a, b);
+        case 103: {
+          const _p$7 = _M0FP36mizchi5wacon4rv643rs1(inst);
+          const _tmp = self.regs;
+          $bound_check(_tmp, _p$7);
+          const target = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(_tmp[_p$7], _M0FP36mizchi5wacon4rv646imm__i(inst)), $_2L);
+          const _p$8 = _M0FP36mizchi5wacon4rv642rd(inst);
+          const _p$9 = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+          if (_p$8 !== 0) {
+            const _tmp$2 = self.regs;
+            $bound_check(_tmp$2, _p$8);
+            _tmp$2[_p$8] = _p$9;
+          }
+          self.pc = target;
           break;
         }
-        case 6: {
-          taken = _M0IP016_24default__implPB7Compare6op__ltGmE(a, b);
+        case 99: {
+          const _p$10 = _M0FP36mizchi5wacon4rv643rs1(inst);
+          const _tmp$2 = self.regs;
+          $bound_check(_tmp$2, _p$10);
+          const a = _tmp$2[_p$10];
+          const _p$11 = _M0FP36mizchi5wacon4rv643rs2(inst);
+          const _tmp$3 = self.regs;
+          $bound_check(_tmp$3, _p$11);
+          const b = _tmp$3[_p$11];
+          const _bind = _M0FP36mizchi5wacon4rv646funct3(inst);
+          let taken;
+          switch (_bind) {
+            case 0: {
+              taken = _M0IPC15int645Int64PB2Eq5equal(a, b);
+              break;
+            }
+            case 1: {
+              taken = _M0IP016_24default__implPB2Eq10not__equalGlE(a, b);
+              break;
+            }
+            case 4: {
+              taken = _M0IP016_24default__implPB7Compare6op__ltGlE(a, b);
+              break;
+            }
+            case 5: {
+              taken = _M0IP016_24default__implPB7Compare6op__geGlE(a, b);
+              break;
+            }
+            case 6: {
+              taken = _M0IP016_24default__implPB7Compare6op__ltGmE(a, b);
+              break;
+            }
+            case 7: {
+              taken = _M0IP016_24default__implPB7Compare6op__geGmE(a, b);
+              break;
+            }
+            default: {
+              taken = false;
+            }
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, taken ? _M0FP36mizchi5wacon4rv646imm__b(inst) : inst_size);
+          break;
+        }
+        case 3: {
+          const _p$12 = _M0FP36mizchi5wacon4rv643rs1(inst);
+          const _tmp$4 = self.regs;
+          $bound_check(_tmp$4, _p$12);
+          const addr = _M0IPC15int645Int64PB3Add3add(_tmp$4[_p$12], _M0FP36mizchi5wacon4rv646imm__i(inst));
+          const _bind$2 = _M0FP36mizchi5wacon4rv646funct3(inst);
+          let val;
+          switch (_bind$2) {
+            case 0: {
+              val = _M0FP36mizchi5wacon4rv649sign__ext(_M0MP36mizchi5wacon4rv643Cpu8load__u8(self, addr), 7);
+              break;
+            }
+            case 1: {
+              val = _M0FP36mizchi5wacon4rv649sign__ext(_M0MP36mizchi5wacon4rv643Cpu9load__u16(self, addr), 15);
+              break;
+            }
+            case 2: {
+              val = _M0FP36mizchi5wacon4rv646sext32(_M0MP36mizchi5wacon4rv643Cpu9load__u32(self, addr));
+              break;
+            }
+            case 3: {
+              val = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, addr);
+              break;
+            }
+            case 4: {
+              val = _M0MP36mizchi5wacon4rv643Cpu8load__u8(self, addr);
+              break;
+            }
+            case 5: {
+              val = _M0MP36mizchi5wacon4rv643Cpu9load__u16(self, addr);
+              break;
+            }
+            case 6: {
+              val = _M0IPC15int645Int64PB6BitAnd4land(_M0MP36mizchi5wacon4rv643Cpu9load__u32(self, addr), $4294967295L);
+              break;
+            }
+            default: {
+              val = $0L;
+            }
+          }
+          const _p$13 = _M0FP36mizchi5wacon4rv642rd(inst);
+          if (_p$13 !== 0) {
+            const _tmp$5 = self.regs;
+            $bound_check(_tmp$5, _p$13);
+            _tmp$5[_p$13] = val;
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+          break;
+        }
+        case 35: {
+          const _p$14 = _M0FP36mizchi5wacon4rv643rs1(inst);
+          const _tmp$5 = self.regs;
+          $bound_check(_tmp$5, _p$14);
+          const addr$2 = _M0IPC15int645Int64PB3Add3add(_tmp$5[_p$14], _M0FP36mizchi5wacon4rv646imm__s(inst));
+          const _p$15 = _M0FP36mizchi5wacon4rv643rs2(inst);
+          const _tmp$6 = self.regs;
+          $bound_check(_tmp$6, _p$15);
+          const val$2 = _tmp$6[_p$15];
+          const _bind$3 = _M0FP36mizchi5wacon4rv646funct3(inst);
+          switch (_bind$3) {
+            case 0: {
+              _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, addr$2, val$2);
+              break;
+            }
+            case 1: {
+              _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, addr$2, val$2);
+              break;
+            }
+            case 2: {
+              _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, addr$2, val$2);
+              break;
+            }
+            case 3: {
+              _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, addr$2, val$2);
+              break;
+            }
+          }
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+          break;
+        }
+        case 19: {
+          _M0MP36mizchi5wacon4rv643Cpu12exec__alu__i(self, inst, inst_size);
+          break;
+        }
+        case 51: {
+          _M0MP36mizchi5wacon4rv643Cpu12exec__alu__r(self, inst, inst_size);
+          break;
+        }
+        case 27: {
+          _M0MP36mizchi5wacon4rv643Cpu13exec__alu__iw(self, inst, inst_size);
+          break;
+        }
+        case 59: {
+          _M0MP36mizchi5wacon4rv643Cpu13exec__alu__rw(self, inst, inst_size);
           break;
         }
         case 7: {
-          taken = _M0IP016_24default__implPB7Compare6op__geGmE(a, b);
+          break _L$2;
+        }
+        case 39: {
+          break _L$2;
+        }
+        case 67: {
+          break _L$2;
+        }
+        case 71: {
+          break _L$2;
+        }
+        case 75: {
+          break _L$2;
+        }
+        case 79: {
+          break _L$2;
+        }
+        case 83: {
+          break _L$2;
+        }
+        case 115: {
+          const f3 = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(_M0FP36mizchi5wacon4rv644ushr(inst, 12), $7L));
+          if (f3 === 0) {
+            _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self);
+            self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
+          } else {
+            _M0MP36mizchi5wacon4rv643Cpu9exec__csr(self, inst, inst_size);
+          }
+          break;
+        }
+        case 47: {
+          _M0MP36mizchi5wacon4rv643Cpu12exec__atomic(self, inst, inst_size);
+          break;
+        }
+        case 15: {
+          self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, inst_size);
           break;
         }
         default: {
-          taken = false;
+          self.halted = true;
         }
       }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, taken ? _M0FP36mizchi5wacon4rv646imm__b(_inst) : _inst_size);
-      break;
+      break _L;
     }
-    case 3: {
-      const _p$12 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$4 = self.regs;
-      $bound_check(_tmp$4, _p$12);
-      const addr = _M0IPC15int645Int64PB3Add3add(_tmp$4[_p$12], _M0FP36mizchi5wacon4rv646imm__i(_inst));
-      const _bind$3 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-      let val;
-      switch (_bind$3) {
-        case 0: {
-          val = _M0FP36mizchi5wacon4rv649sign__ext(_M0MP36mizchi5wacon4rv643Cpu8load__u8(self, addr), 7);
-          break;
-        }
-        case 1: {
-          val = _M0FP36mizchi5wacon4rv649sign__ext(_M0MP36mizchi5wacon4rv643Cpu9load__u16(self, addr), 15);
-          break;
-        }
-        case 2: {
-          val = _M0FP36mizchi5wacon4rv646sext32(_M0MP36mizchi5wacon4rv643Cpu9load__u32(self, addr));
-          break;
-        }
-        case 3: {
-          val = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, addr);
-          break;
-        }
-        case 4: {
-          val = _M0MP36mizchi5wacon4rv643Cpu8load__u8(self, addr);
-          break;
-        }
-        case 5: {
-          val = _M0MP36mizchi5wacon4rv643Cpu9load__u16(self, addr);
-          break;
-        }
-        case 6: {
-          val = _M0IPC15int645Int64PB6BitAnd4land(_M0MP36mizchi5wacon4rv643Cpu9load__u32(self, addr), $4294967295L);
-          break;
-        }
-        default: {
-          val = $0L;
-        }
-      }
-      const _p$13 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      if (_p$13 !== 0) {
-        const _tmp$5 = self.regs;
-        $bound_check(_tmp$5, _p$13);
-        _tmp$5[_p$13] = val;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 35: {
-      const _p$14 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$5 = self.regs;
-      $bound_check(_tmp$5, _p$14);
-      const addr$2 = _M0IPC15int645Int64PB3Add3add(_tmp$5[_p$14], _M0FP36mizchi5wacon4rv646imm__s(_inst));
-      const _p$15 = _M0FP36mizchi5wacon4rv643rs2(_inst);
-      const _tmp$6 = self.regs;
-      $bound_check(_tmp$6, _p$15);
-      const val$2 = _tmp$6[_p$15];
-      const _bind$4 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-      switch (_bind$4) {
-        case 0: {
-          _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, addr$2, val$2);
-          break;
-        }
-        case 1: {
-          _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, addr$2, val$2);
-          break;
-        }
-        case 2: {
-          _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, addr$2, val$2);
-          break;
-        }
-        case 3: {
-          _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, addr$2, val$2);
-          break;
-        }
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 19: {
-      const imm = _M0FP36mizchi5wacon4rv646imm__i(_inst);
-      const _p$16 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$7 = self.regs;
-      $bound_check(_tmp$7, _p$16);
-      const src = _tmp$7[_p$16];
-      const shamt = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(imm, $63L));
-      const _bind$5 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-      let result;
-      switch (_bind$5) {
-        case 0: {
-          result = _M0IPC15int645Int64PB3Add3add(src, imm);
-          break;
-        }
-        case 1: {
-          result = _M0IPC15int645Int64PB3Shl3shl(src, shamt);
-          break;
-        }
-        case 2: {
-          result = _M0IP016_24default__implPB7Compare6op__ltGlE(src, imm) ? $1L : $0L;
-          break;
-        }
-        case 3: {
-          result = _M0IP016_24default__implPB7Compare6op__ltGmE(src, imm) ? $1L : $0L;
-          break;
-        }
-        case 4: {
-          result = _M0IPC15int645Int64PB6BitXOr4lxor(src, imm);
-          break;
-        }
-        case 5: {
-          result = _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(_inst, 26), $32L), $0L) ? _M0IPC15int645Int64PB3Shr3shr(src, shamt) : _M0IPC16uint646UInt64PB3Shr3shr(src, shamt);
-          break;
-        }
-        case 6: {
-          result = _M0IPC15int645Int64PB5BitOr3lor(src, imm);
-          break;
-        }
-        case 7: {
-          result = _M0IPC15int645Int64PB6BitAnd4land(src, imm);
-          break;
-        }
-        default: {
-          result = $0L;
-        }
-      }
-      const _p$17 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      if (_p$17 !== 0) {
-        const _tmp$8 = self.regs;
-        $bound_check(_tmp$8, _p$17);
-        _tmp$8[_p$17] = result;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 51: {
-      const _p$18 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$8 = self.regs;
-      $bound_check(_tmp$8, _p$18);
-      const a$2 = _tmp$8[_p$18];
-      const _p$19 = _M0FP36mizchi5wacon4rv643rs2(_inst);
-      const _tmp$9 = self.regs;
-      $bound_check(_tmp$9, _p$19);
-      const b$2 = _tmp$9[_p$19];
-      const f7 = _M0FP36mizchi5wacon4rv646funct7(_inst);
-      let result$2;
-      if (f7 === 1) {
-        result$2 = _M0FP36mizchi5wacon4rv649exec__m64(_M0FP36mizchi5wacon4rv646funct3(_inst), a$2, b$2);
-      } else {
-        const _bind$6 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-        switch (_bind$6) {
-          case 0: {
-            result$2 = f7 === 32 ? _M0IPC15int645Int64PB3Sub3sub(a$2, b$2) : _M0IPC15int645Int64PB3Add3add(a$2, b$2);
-            break;
-          }
-          case 1: {
-            result$2 = _M0IPC15int645Int64PB3Shl3shl(a$2, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$2, $63L)));
-            break;
-          }
-          case 2: {
-            result$2 = _M0IP016_24default__implPB7Compare6op__ltGlE(a$2, b$2) ? $1L : $0L;
-            break;
-          }
-          case 3: {
-            result$2 = _M0IP016_24default__implPB7Compare6op__ltGmE(a$2, b$2) ? $1L : $0L;
-            break;
-          }
-          case 4: {
-            result$2 = _M0IPC15int645Int64PB6BitXOr4lxor(a$2, b$2);
-            break;
-          }
-          case 5: {
-            result$2 = f7 === 32 ? _M0IPC15int645Int64PB3Shr3shr(a$2, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$2, $63L))) : _M0IPC16uint646UInt64PB3Shr3shr(a$2, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$2, $63L)));
-            break;
-          }
-          case 6: {
-            result$2 = _M0IPC15int645Int64PB5BitOr3lor(a$2, b$2);
-            break;
-          }
-          case 7: {
-            result$2 = _M0IPC15int645Int64PB6BitAnd4land(a$2, b$2);
-            break;
-          }
-          default: {
-            result$2 = $0L;
-          }
-        }
-      }
-      const _p$20 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      if (_p$20 !== 0) {
-        const _tmp$10 = self.regs;
-        $bound_check(_tmp$10, _p$20);
-        _tmp$10[_p$20] = result$2;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 27: {
-      const imm$2 = _M0FP36mizchi5wacon4rv646imm__i(_inst);
-      const _p$21 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$10 = self.regs;
-      $bound_check(_tmp$10, _p$21);
-      const src$2 = _tmp$10[_p$21];
-      const shamt$2 = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(imm$2, $31L));
-      const _bind$6 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-      let result$3;
-      switch (_bind$6) {
-        case 0: {
-          result$3 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(src$2, imm$2), $4294967295L));
-          break;
-        }
-        case 1: {
-          result$3 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shl3shl(src$2, shamt$2), $4294967295L));
-          break;
-        }
-        case 5: {
-          const w = _M0IPC15int645Int64PB6BitAnd4land(src$2, $4294967295L);
-          result$3 = _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(_inst, 26), $32L), $0L) ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shr3shr(_M0FP36mizchi5wacon4rv646sext32(w), shamt$2), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(w, shamt$2), $4294967295L));
-          break;
-        }
-        default: {
-          result$3 = $0L;
-        }
-      }
-      const _p$22 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      if (_p$22 !== 0) {
-        const _tmp$11 = self.regs;
-        $bound_check(_tmp$11, _p$22);
-        _tmp$11[_p$22] = result$3;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 59: {
-      const _p$23 = _M0FP36mizchi5wacon4rv643rs1(_inst);
-      const _tmp$11 = self.regs;
-      $bound_check(_tmp$11, _p$23);
-      const a$3 = _tmp$11[_p$23];
-      const _p$24 = _M0FP36mizchi5wacon4rv643rs2(_inst);
-      const _tmp$12 = self.regs;
-      $bound_check(_tmp$12, _p$24);
-      const b$3 = _tmp$12[_p$24];
-      const f7$2 = _M0FP36mizchi5wacon4rv646funct7(_inst);
-      let result$4;
-      if (f7$2 === 1) {
-        result$4 = _M0FP36mizchi5wacon4rv6410exec__m32w(_M0FP36mizchi5wacon4rv646funct3(_inst), a$3, b$3);
-      } else {
-        const _bind$7 = _M0FP36mizchi5wacon4rv646funct3(_inst);
-        switch (_bind$7) {
-          case 0: {
-            result$4 = f7$2 === 32 ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Sub3sub(a$3, b$3), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Add3add(a$3, b$3), $4294967295L));
-            break;
-          }
-          case 1: {
-            result$4 = _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shl3shl(a$3, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$3, $31L))), $4294967295L));
-            break;
-          }
-          case 5: {
-            const w$2 = _M0IPC15int645Int64PB6BitAnd4land(a$3, $4294967295L);
-            result$4 = f7$2 === 32 ? _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Shr3shr(_M0FP36mizchi5wacon4rv646sext32(w$2), _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$3, $31L))), $4294967295L)) : _M0FP36mizchi5wacon4rv646sext32(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(w$2, _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(b$3, $31L))), $4294967295L));
-            break;
-          }
-          default: {
-            result$4 = $0L;
-          }
-        }
-      }
-      const _p$25 = _M0FP36mizchi5wacon4rv642rd(_inst);
-      if (_p$25 !== 0) {
-        const _tmp$13 = self.regs;
-        $bound_check(_tmp$13, _p$25);
-        _tmp$13[_p$25] = result$4;
-      }
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    case 7: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 39: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 67: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 71: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 75: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 79: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 83: {
-      _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, _inst, _inst_size);
-      break;
-    }
-    case 115: {
-      const funct3 = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(_inst, 12), $7L));
-      if (funct3 === 0) {
-        _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self);
-        self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      } else {
-        _M0MP36mizchi5wacon4rv643Cpu9exec__csr(self, _inst, _inst_size);
-      }
-      break;
-    }
-    case 47: {
-      _M0MP36mizchi5wacon4rv643Cpu12exec__atomic(self, _inst, _inst_size);
-      break;
-    }
-    case 15: {
-      self.pc = _M0IPC15int645Int64PB3Add3add(self.pc, _inst_size);
-      break;
-    }
-    default: {
-      if (self.trace_syscalls) {
-        self.stdout = `${self.stdout}[unknown opcode: 0x${_M0MPC13int3Int18to__string_2einner(op, 10)} inst=0x${_M0MPC15int645Int6418to__string_2einner(_inst, 10)} pc=0x${_M0MPC15int645Int6418to__string_2einner(self.pc, 10)}]\n`;
-      }
-      self.halted = true;
-      return false;
-    }
+    _M0MP36mizchi5wacon4rv643Cpu11exec__float(self, inst, inst_size);
   }
-  const _tmp$13 = self.regs;
-  $bound_check(_tmp$13, 0);
-  _tmp$13[0] = $0L;
-  return true;
+  const _tmp = self.regs;
+  $bound_check(_tmp, 0);
+  _tmp[0] = $0L;
+}
+function _M0MP36mizchi5wacon4rv643Cpu10exec__inst(self, inst, inst_size) {
+  const op = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(inst, $127L));
+  _M0MP36mizchi5wacon4rv643Cpu8dispatch(self, op, inst, inst_size);
+}
+function _M0MP36mizchi5wacon4rv643Cpu20load__u32__unchecked(self, addr) {
+  const a = _M0MPC15int645Int647to__int(addr);
+  const _tmp = self.memory;
+  $bound_check(_tmp, a);
+  const _tmp$2 = _M0IPC15int645Int64PB6BitAnd4land(_M0MPC13int3Int9to__int64(_tmp[a]), $255L);
+  const _tmp$3 = self.memory;
+  const _tmp$4 = a + 1 | 0;
+  $bound_check(_tmp$3, _tmp$4);
+  const _tmp$5 = _M0IPC15int645Int64PB5BitOr3lor(_tmp$2, _M0IPC15int645Int64PB3Shl3shl(_M0IPC15int645Int64PB6BitAnd4land(_M0MPC13int3Int9to__int64(_tmp$3[_tmp$4]), $255L), 8));
+  const _tmp$6 = self.memory;
+  const _tmp$7 = a + 2 | 0;
+  $bound_check(_tmp$6, _tmp$7);
+  const _tmp$8 = _M0IPC15int645Int64PB5BitOr3lor(_tmp$5, _M0IPC15int645Int64PB3Shl3shl(_M0IPC15int645Int64PB6BitAnd4land(_M0MPC13int3Int9to__int64(_tmp$6[_tmp$7]), $255L), 16));
+  const _tmp$9 = self.memory;
+  const _tmp$10 = a + 3 | 0;
+  $bound_check(_tmp$9, _tmp$10);
+  return _M0IPC15int645Int64PB5BitOr3lor(_tmp$8, _M0IPC15int645Int64PB3Shl3shl(_M0IPC15int645Int64PB6BitAnd4land(_M0MPC13int3Int9to__int64(_tmp$9[_tmp$10]), $255L), 24));
 }
 function _M0MP36mizchi5wacon4rv643Cpu10run__limit(self, max_steps) {
   let steps = 0;
   while (true) {
-    if (steps >= max_steps || !_M0MP36mizchi5wacon4rv643Cpu4step(self)) {
+    if (steps < max_steps) {
+      const end = (steps + 1024 | 0) < max_steps ? steps + 1024 | 0 : max_steps;
+      while (true) {
+        if (steps < end) {
+          if (self.halted) {
+            return steps;
+          }
+          const raw = _M0MP36mizchi5wacon4rv643Cpu20load__u32__unchecked(self, self.pc);
+          if (_M0IPC15int645Int64PB2Eq5equal(raw, $0L)) {
+            self.halted = true;
+            return steps;
+          }
+          let _bind;
+          if (_M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(raw, $3L), $3L)) {
+            const _bind$2 = _M0FP36mizchi5wacon4rv6418expand__compressed(_M0IPC15int645Int64PB6BitAnd4land(raw, $65535L));
+            if (_bind$2 === undefined) {
+              self.halted = true;
+              return steps;
+            } else {
+              const _Some = _bind$2;
+              const _expanded = _Some;
+              _bind = { _0: $2L, _1: _expanded };
+            }
+          } else {
+            _bind = { _0: $4L, _1: raw };
+          }
+          const _inst_size = _bind._0;
+          const _inst = _bind._1;
+          _M0MP36mizchi5wacon4rv643Cpu10exec__inst(self, _inst, _inst_size);
+          steps = steps + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      continue;
+    } else {
       break;
     }
-    steps = steps + 1 | 0;
-    continue;
   }
   return steps;
 }

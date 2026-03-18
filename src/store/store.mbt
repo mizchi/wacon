@@ -21,6 +21,12 @@ fn str_to_c(s : String) -> Bytes {
 }
 
 ///|
+/// Read a file from filesystem
+pub fn read_file(path : String) -> Bytes {
+  read_file_ffi(str_to_c(path))
+}
+
+///|
 /// Store configuration
 pub(all) struct Store {
   root : String

@@ -71,6 +71,30 @@ test "rv64 load and run alpine static hello" {
 }
 
 ///|
+test "rv64 busybox echo hello" {
+  let data = @store.read_file(
+    "/Users/mz/ghq/github.com/mizchi/wacon/fixtures/busybox-rv64-static.elf",
+  )
+  assert_true(data.length() > 0)
+  let cpu = @rv64.Cpu::new(16 * 1024 * 1024) // 16MB
+  assert_true(cpu.load_elf(data))
+  // Linux ABI: stack layout is [argc, argv[0], argv[1], ..., NULL, envp..., NULL, auxv...]
+  let str_base = (16 * 1024 * 1024 - 4096).to_int64()
+  cpu.write_cstr(str_base, "echo")
+  cpu.write_cstr(str_base + 16L, "hello")
+  // Stack: argc, argv[0], argv[1], NULL, NULL (empty envp)
+  let sp = str_base - 128L
+  cpu.store_u64(sp, 2L) // argc
+  cpu.store_u64(sp + 8L, str_base) // argv[0] = "echo"
+  cpu.store_u64(sp + 16L, str_base + 16L) // argv[1] = "hello"
+  cpu.store_u64(sp + 24L, 0L) // NULL (end of argv)
+  cpu.store_u64(sp + 32L, 0L) // NULL (end of envp)
+  cpu.regs[2] = sp
+  let _ = cpu.run_limit(10_000_000)
+  inspect(cpu.stdout, content="hello\n")
+}
+
+///|
 test "rv64 mul/div (M extension)" {
   let cpu = @rv64.Cpu::new(4096)
   // addi x1, x0, 7

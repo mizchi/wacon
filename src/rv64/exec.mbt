@@ -343,10 +343,33 @@ pub fn Cpu::step(self : Cpu) -> Bool {
       self.set_reg(rd(inst), result)
       self.pc += inst_size
     }
-    // ECALL / EBREAK
+    // FLW / FLD
+    0x07 => self.exec_float(inst, inst_size)
+    // FSW / FSD
+    0x27 => self.exec_float(inst, inst_size)
+    // FMADD
+    0x43 => self.exec_float(inst, inst_size)
+    // FMSUB
+    0x47 => self.exec_float(inst, inst_size)
+    // FNMSUB
+    0x4B => self.exec_float(inst, inst_size)
+    // FNMADD
+    0x4F => self.exec_float(inst, inst_size)
+    // FP-OP
+    0x53 => self.exec_float(inst, inst_size)
+    // ECALL / EBREAK / CSR
     0x73 => {
-      self.handle_ecall()
-      self.pc += inst_size
+      let funct3 = (inst.reinterpret_as_uint64() >> 12)
+        .reinterpret_as_int64()
+        .land(0x7L)
+        .to_int()
+      if funct3 == 0 {
+        self.handle_ecall()
+        self.pc += inst_size
+      } else {
+        // CSR instruction
+        self.exec_csr(inst, inst_size)
+      }
     }
     // AMO (A extension)
     0x2F => self.exec_atomic(inst, inst_size)

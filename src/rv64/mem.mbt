@@ -1,6 +1,11 @@
 ///|
 pub fn Cpu::load_u8(self : Cpu, addr : Int64) -> Int64 {
-  self.memory[addr.to_int()].to_int().to_int64().land(0xFFL)
+  let a = addr.to_int()
+  if a < 0 || a >= self.memory.length() {
+    0L
+  } else {
+    self.memory[a].to_int().to_int64().land(0xFFL)
+  }
 }
 
 ///|
@@ -34,7 +39,10 @@ pub fn Cpu::load_u64(self : Cpu, addr : Int64) -> Int64 {
 
 ///|
 pub fn Cpu::store_u8(self : Cpu, addr : Int64, val : Int64) -> Unit {
-  self.memory[addr.to_int()] = val.land(0xFFL).to_int().to_byte()
+  let a = addr.to_int()
+  if a >= 0 && a < self.memory.length() {
+    self.memory[a] = val.land(0xFFL).to_int().to_byte()
+  }
 }
 
 ///|

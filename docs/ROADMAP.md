@@ -126,6 +126,27 @@ JIT の選択肢:
 
 ---
 
+## elfconv との比較 (2026-03-18)
+
+[elfconv](https://github.com/yomaytk/elfconv) は ELF (AArch64) → WASM の AOT 変換ツール。
+
+| | wacon (RV64 インタプリタ) | elfconv (AOT) |
+|---|---|---|
+| **ランタイム** | 225KB JS | 532KB JS |
+| **busybox** | 998KB ELF | ~10MB WASM |
+| **合計転送サイズ** | **~1.2MB** | **~10.5MB** |
+| **echo 速度** | 25-35ms | <1ms (推定) |
+| **ls 速度** | timeout (200M steps) | 即座 |
+| **fork/exec** | 未実装 | 対応済み |
+| **対応アーキ** | RISC-V 64 | AArch64 のみ |
+
+### 考察
+
+- elfconv は AOT なのでネイティブ並の速度だが、WASM バイナリが巨大（元 ELF の 5-10 倍）
+- wacon は ELF をそのままロードするので転送サイズは小さいが、インタプリタの速度限界がある
+- ハイブリッド案: ホットパスだけ WASM に JIT コンパイルし、コールドパスはインタプリタで実行
+- elfconv は AArch64 のみ。wacon に RV64→WASM の AOT 変換を追加すれば両方の利点を取れる可能性
+
 ## 技術的メモ
 
 ### busybox の命令コスト

@@ -53,6 +53,24 @@ test "rv64 load and run hello64 with C extension" {
 }
 
 ///|
+test "rv64 load and run alpine static hello" {
+  let data = @store.read_file(
+    "/Users/mz/ghq/github.com/mizchi/wacon/fixtures/hello-alpine-static.elf",
+  )
+  assert_true(data.length() > 0)
+  let cpu = @rv64.Cpu::new(8 * 1024 * 1024) // 8MB
+  assert_true(cpu.load_elf(data))
+  let _ = cpu.run_limit(1000000)
+  inspect(
+    cpu.stdout,
+    content=(
+      #|hello from alpine rv64!
+    ),
+  )
+  inspect(cpu.exit_code, content="0")
+}
+
+///|
 test "rv64 mul/div (M extension)" {
   let cpu = @rv64.Cpu::new(4096)
   // addi x1, x0, 7

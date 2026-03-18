@@ -348,6 +348,8 @@ pub fn Cpu::step(self : Cpu) -> Bool {
       self.handle_ecall()
       self.pc += inst_size
     }
+    // AMO (A extension)
+    0x2F => self.exec_atomic(inst, inst_size)
     // FENCE
     0x0F => self.pc += inst_size
     _ => {

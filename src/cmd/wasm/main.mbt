@@ -45,7 +45,7 @@ fn main {
   cpu.store_u64(sp + ((args.length() + 2) * 8).to_int64(), 0L)
   cpu.regs[2] = sp
   // Run
-  let _ = cpu.run_limit(50_000_000)
+  let _ = cpu.run_limit(200_000_000)
   // Output
   js_write_stdout(cpu.stdout)
   if not(cpu.halted) {

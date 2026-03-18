@@ -6534,7 +6534,7 @@ function _M0FP46mizchi5wacon3cmd4wasm11parse__args(s) {
   const _tmp$3 = cpu.regs;
   $bound_check(_tmp$3, 2);
   _tmp$3[2] = sp;
-  _M0MP36mizchi5wacon4rv643Cpu10run__limit(cpu, 50000000);
+  _M0MP36mizchi5wacon4rv643Cpu10run__limit(cpu, 200000000);
   _M0FP46mizchi5wacon3cmd4wasm17js__write__stdout(cpu.stdout);
   if (!cpu.halted) {
     _M0FP46mizchi5wacon3cmd4wasm17js__write__stdout("[timeout: 50M steps]\r\n");

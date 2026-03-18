@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>wacon - WASM Container Runtime</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
+  <style>
+    body { margin: 0; background: #1e1e1e; color: #fff; font-family: monospace; }
+    #header { padding: 12px 16px; background: #2d2d2d; border-bottom: 1px solid #444; }
+    #header h1 { margin: 0; font-size: 16px; }
+    #header p { margin: 4px 0 0; font-size: 12px; color: #888; }
+    #terminal { padding: 8px; }
+    #input-row { display: flex; padding: 8px 16px; gap: 8px; background: #2d2d2d; border-top: 1px solid #444; }
+    #cmd-input { flex: 1; background: #1e1e1e; color: #fff; border: 1px solid #555; padding: 6px 10px; font-family: monospace; font-size: 14px; }
+    #run-btn { background: #0e639c; color: #fff; border: none; padding: 6px 16px; cursor: pointer; font-family: monospace; }
+    #run-btn:hover { background: #1177bb; }
+    #run-btn:disabled { background: #555; cursor: not-allowed; }
+    #status { padding: 4px 16px; font-size: 11px; color: #666; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>wacon - Alpine busybox on RISC-V emulator</h1>
+    <p>MoonBit RV64IMACFD emulator running Alpine Linux static busybox in browser</p>
+  </div>
+  <div id="terminal"></div>
+  <div id="input-row">
+    <input id="cmd-input" type="text" value="echo hello from wacon" placeholder="busybox command...">
+    <button id="run-btn" disabled>Loading...</button>
+  </div>
+  <div id="status"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+  <script>
+    const term = new Terminal({ rows: 20, cols: 100, fontSize: 14, theme: { background: '#1e1e1e' } });
+    term.open(document.getElementById('terminal'));
+    term.writeln('\x1b[33mwacon\x1b[0m - RISC-V emulator (RV64IMACFD)');
+    term.writeln('Loading busybox...');
+
+    const status = document.getElementById('status');
+    const btn = document.getElementById('run-btn');
+    const input = document.getElementById('cmd-input');
+
+    let elfData = null;
+    let waconReady = false;
+
+    // Load busybox ELF
+    fetch('busybox.elf')
+      .then(r => r.arrayBuffer())
+      .then(buf => {
+        elfData = new Uint8Array(buf);
+        term.writeln(`Loaded busybox.elf (${(elfData.length / 1024).toFixed(0)} KB)`);
+        status.textContent = `busybox: ${elfData.length} bytes`;
+        loadWacon();
+      })
+      .catch(e => term.writeln('\x1b[31mFailed to load busybox.elf\x1b[0m'));
+
+    function loadWacon() {
+      // Setup globals before loading wacon.js
+      window.__wacon_elf_data = elfData;
+      window.__wacon_argv = 'echo ready';
+      window.__wacon_write = (s) => {}; // suppress initial run
+
+      const script = document.createElement('script');
+      script.src = 'wacon.js';
+      script.onload = () => {
+        waconReady = true;
+        btn.disabled = false;
+        btn.textContent = 'Run';
+        term.writeln('Emulator ready.');
+        term.writeln('');
+        term.write('\x1b[32m$ \x1b[0m');
+      };
+      document.body.appendChild(script);
+    }
+
+    function runCommand(cmd) {
+      if (!waconReady || !elfData) return;
+      term.writeln(cmd);
+      btn.disabled = true;
+      btn.textContent = 'Running...';
+
+      setTimeout(() => {
+        // Re-load wacon.js to re-run main with new args
+        window.__wacon_elf_data = elfData;
+        window.__wacon_argv = cmd;
+        let output = '';
+        window.__wacon_write = (s) => { output += s; };
+
+        // Re-execute by fetching and eval
+        fetch('wacon.js')
+          .then(r => r.text())
+          .then(code => {
+            const t0 = performance.now();
+            try {
+              new Function(code)();
+            } catch(e) {
+              output += '\x1b[31m' + e.message + '\x1b[0m\r\n';
+            }
+            const elapsed = (performance.now() - t0).toFixed(0);
+            if (output) {
+              // Replace \n with \r\n for xterm
+              term.write(output.replace(/(?<!\r)\n/g, '\r\n'));
+            }
+            status.textContent = `Executed in ${elapsed}ms`;
+            btn.disabled = false;
+            btn.textContent = 'Run';
+            term.write('\x1b[32m$ \x1b[0m');
+          });
+      }, 10);
+    }
+
+    btn.addEventListener('click', () => runCommand(input.value));
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') runCommand(input.value);
+    });
+  </script>
+</body>
+</html>

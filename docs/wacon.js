@@ -282,10 +282,11 @@ function _M0TPB9ArrayViewGcE(param0, param1, param2) {
   this.start = param1;
   this.end = param2;
 }
-function _M0TP36mizchi5wacon3vfs8OpenFile(param0, param1, param2) {
+function _M0TP36mizchi5wacon3vfs8OpenFile(param0, param1, param2, param3) {
   this.inode_idx = param0;
   this.offset = param1;
   this.flags = param2;
+  this.dir_read = param3;
 }
 function _M0TP36mizchi5wacon4rv643Fpu(param0, param1, param2) {
   this.regs = param0;
@@ -3474,7 +3475,7 @@ function _M0MP36mizchi5wacon3vfs3Vfs4open(self, dir_fd, path, flags) {
     }
     const fd = self.next_fd;
     self.next_fd = self.next_fd + 1 | 0;
-    _M0MPB3Map3setGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd, new _M0TP36mizchi5wacon3vfs8OpenFile(_idx, 0, flags));
+    _M0MPB3Map3setGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd, new _M0TP36mizchi5wacon3vfs8OpenFile(_idx, 0, flags, false));
     return fd;
   }
 }
@@ -3584,6 +3585,10 @@ function _M0MP36mizchi5wacon3vfs3Vfs7readdir(self, fd) {
     if (_M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(inode.itype, 1)) {
       return [];
     }
+    if (_of.dir_read) {
+      return [];
+    }
+    _of.dir_read = true;
     const entries = [];
     const _it = _M0MPB3Map5iter2GsiE(inode.children);
     while (true) {

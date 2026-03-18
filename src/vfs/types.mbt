@@ -26,6 +26,8 @@ pub(all) struct OpenFile {
   inode_idx : Int
   mut offset : Int
   flags : Int
+  /// For directory: whether getdents already returned entries
+  mut dir_read : Bool
 } derive(Show)
 
 ///|

@@ -168,7 +168,12 @@ pub fn Vfs::open(self : Vfs, dir_fd : Int, path : String, flags : Int) -> Int {
       }
       let fd = self.next_fd
       self.next_fd += 1
-      self.fds[fd] = OpenFile::{ inode_idx: idx, offset: 0, flags }
+      self.fds[fd] = OpenFile::{
+        inode_idx: idx,
+        offset: 0,
+        flags,
+        dir_read: false,
+      }
       fd
     }
   }
@@ -255,6 +260,11 @@ pub fn Vfs::readdir(self : Vfs, fd : Int) -> Array[(String, InodeType)] {
       if inode.itype != Dir {
         return []
       }
+      // Return empty on second call (EOF for getdents64)
+      if of.dir_read {
+        return []
+      }
+      of.dir_read = true
       let entries : Array[(String, InodeType)] = []
       for name, idx in inode.children {
         entries.push((name, self.inodes[idx].itype))

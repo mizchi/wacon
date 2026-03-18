@@ -88,7 +88,7 @@ pub fn parse_elf(data : Bytes) -> ElfInfo? {
 
 ///|
 /// PIE base address for position-independent executables
-let pie_base : Int64 = 0x40_0000L
+pub let pie_base : Int64 = 0x40_0000L
 
 ///|
 /// Load ELF64 into CPU memory (supports PIE)

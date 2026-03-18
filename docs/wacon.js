@@ -211,7 +211,7 @@ function $make_array_len_and_init(a, b) {
   arr.fill(b);
   return arr;
 }
-function _M0TP36mizchi5wacon4rv643Cpu(param0, param1, param2, param3, param4, param5, param6) {
+function _M0TP36mizchi5wacon4rv643Cpu(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   this.regs = param0;
   this.pc = param1;
   this.memory = param2;
@@ -219,7 +219,12 @@ function _M0TP36mizchi5wacon4rv643Cpu(param0, param1, param2, param3, param4, pa
   this.stdout = param4;
   this.halted = param5;
   this.exit_code = param6;
+  this.trace_syscalls = param7;
+  this.syscall_trace = param8;
+  this.last_syscall = param9;
+  this.repeat_count = param10;
 }
+const $_1L = { hi: -1, lo: -1 };
 const $255L = { hi: 0, lo: 255 };
 const $65L = { hi: 0, lo: 65 };
 const $130L = { hi: 0, lo: 130 };
@@ -242,7 +247,6 @@ const $15L = { hi: 0, lo: 15 };
 const $19L = { hi: 0, lo: 19 };
 const $31L = { hi: 0, lo: 31 };
 const $35L = { hi: 0, lo: 35 };
-const $_1L = { hi: -1, lo: -1 };
 const $4095L = { hi: 0, lo: 4095 };
 const $27L = { hi: 0, lo: 27 };
 const $55L = { hi: 0, lo: 55 };
@@ -2511,7 +2515,7 @@ function _M0MP36mizchi5wacon4rv643Fpu3new() {
   return new _M0TP36mizchi5wacon4rv643Fpu($make_array_len_and_init(32, $0L), 0, 0);
 }
 function _M0MP36mizchi5wacon4rv643Cpu3new(mem_size) {
-  return new _M0TP36mizchi5wacon4rv643Cpu($make_array_len_and_init(32, $0L), $0L, $makebytes(mem_size, 0), _M0MP36mizchi5wacon4rv643Fpu3new(), "", false, 0);
+  return new _M0TP36mizchi5wacon4rv643Cpu($make_array_len_and_init(32, $0L), $0L, $makebytes(mem_size, 0), _M0MP36mizchi5wacon4rv643Fpu3new(), "", false, 0, false, [], $_1L, 0);
 }
 function _M0MP36mizchi5wacon4rv643Cpu11write__cstr(self, addr, s) {
   const bytes = _M0FPC28encoding4utf814encode_2einner(new _M0TPC16string10StringView(s, 0, s.length), false);
@@ -2654,6 +2658,19 @@ function _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self) {
   const _tmp$4 = self.regs;
   $bound_check(_tmp$4, 12);
   const a2 = _tmp$4[12];
+  if (self.trace_syscalls) {
+    _M0MPC15array5Array4pushGlE(self.syscall_trace, num);
+  }
+  if (_M0IPC15int645Int64PB2Eq5equal(num, self.last_syscall)) {
+    self.repeat_count = self.repeat_count + 1 | 0;
+    if (self.repeat_count > 100) {
+      self.halted = true;
+      return undefined;
+    }
+  } else {
+    self.last_syscall = num;
+    self.repeat_count = 0;
+  }
   _L: {
     _L$2: {
       _L$3: {

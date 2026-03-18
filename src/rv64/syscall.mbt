@@ -4,6 +4,20 @@ pub fn Cpu::handle_ecall(self : Cpu) -> Unit {
   let a0 = self.regs[10]
   let a1 = self.regs[11]
   let a2 = self.regs[12]
+  if self.trace_syscalls {
+    self.syscall_trace.push(num)
+  }
+  // Detect infinite syscall loop: same syscall called too many times
+  if num == self.last_syscall {
+    self.repeat_count += 1
+    if self.repeat_count > 100 {
+      self.halted = true
+      return
+    }
+  } else {
+    self.last_syscall = num
+    self.repeat_count = 0
+  }
   match num {
     // io_setup=0, io_destroy=1, io_submit=2, io_cancel=3, io_getevents=4
     0L | 1L | 2L | 3L | 4L => self.regs[10] = 0L

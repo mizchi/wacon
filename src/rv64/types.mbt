@@ -15,6 +15,12 @@ pub(all) struct Cpu {
   mut halted : Bool
   /// Exit code
   mut exit_code : Int
+  /// Syscall trace (for debugging)
+  mut trace_syscalls : Bool
+  syscall_trace : Array[Int64]
+  /// Infinite loop detection
+  mut last_syscall : Int64
+  mut repeat_count : Int
 }
 
 ///|
@@ -27,6 +33,10 @@ pub fn Cpu::new(mem_size : Int) -> Cpu {
     stdout: "",
     halted: false,
     exit_code: 0,
+    trace_syscalls: false,
+    syscall_trace: [],
+    last_syscall: -1L,
+    repeat_count: 0,
   }
 }
 

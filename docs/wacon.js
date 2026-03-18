@@ -36,8 +36,27 @@ function _M0TPB7MyInt64(param0, param1) {
 function $compare_int(a, b) {
   return (a >= b) - (a <= b);
 }
+const _M0FPB12random__seed = () => {
+  if (globalThis.crypto?.getRandomValues) {
+    const array = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(array);
+    return array[0] | 0; // Convert to signed 32
+  } else {
+    return Math.floor(Math.random() * 0x100000000) | 0; // Fallback to Math.random
+  }
+};
+function _M0TPB6Hasher(param0) {
+  this.acc = param0;
+}
 const _M0FPB19int__to__string__js = (x, radix) => {
   return x.toString(radix);
+};
+const _M0FPB21int64__to__string__js = (num, radix) => {
+  let val = (BigInt(num.hi >>> 0) << 32n) | BigInt(num.lo >>> 0);
+  if (val & (1n << 63n)) {
+    val = val - (1n << 64n);
+  }
+  return val.toString(radix);
 };
 function $unsafe_bytes_sub_string(bytes, byte_offset, byte_length) {
   const end_offset = byte_offset + byte_length;
@@ -64,6 +83,48 @@ function _M0TPB9ArrayViewGyE(param0, param1, param2) {
   this.start = param1;
   this.end = param2;
 }
+function $make_array_len_and_init(a, b) {
+  const arr = new Array(a);
+  arr.fill(b);
+  return arr;
+}
+function _M0TPB3MapGsiE(param0, param1, param2, param3, param4, param5, param6) {
+  this.entries = param0;
+  this.size = param1;
+  this.capacity = param2;
+  this.capacity_mask = param3;
+  this.grow_at = param4;
+  this.head = param5;
+  this.tail = param6;
+}
+function _M0TPB3MapGiRP36mizchi5wacon3vfs8OpenFileE(param0, param1, param2, param3, param4, param5, param6) {
+  this.entries = param0;
+  this.size = param1;
+  this.capacity = param2;
+  this.capacity_mask = param3;
+  this.grow_at = param4;
+  this.head = param5;
+  this.tail = param6;
+}
+function _M0TPB5EntryGsiE(param0, param1, param2, param3, param4, param5) {
+  this.prev = param0;
+  this.next = param1;
+  this.psl = param2;
+  this.hash = param3;
+  this.key = param4;
+  this.value = param5;
+}
+function _M0TPB5EntryGiRP36mizchi5wacon3vfs8OpenFileE(param0, param1, param2, param3, param4, param5) {
+  this.prev = param0;
+  this.next = param1;
+  this.psl = param2;
+  this.hash = param3;
+  this.key = param4;
+  this.value = param5;
+}
+function _M0TPC13ref3RefGORPB5EntryGsiEE(param0) {
+  this.val = param0;
+}
 const _M0MPB7MyInt6422convert__to__double__u = (a) => (a.hi >>> 0) * 4294967296.0 + (a.lo >>> 0);
 const _M0MPB7MyInt6423reinterpret__as__double = function f(a) {
   let view = f._view;
@@ -74,6 +135,7 @@ const _M0MPB7MyInt6423reinterpret__as__double = function f(a) {
   view.setUint32(4, a.lo);
   return view.getFloat64(0);
 };
+const $bytes_literal$0 = new Uint8Array();
 const _M0FPB23try__init__wasm__helper = function() {
   try {
     return new WebAssembly.Instance(new WebAssembly.Module(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 13, 2, 96, 0, 1, 127, 96, 4, 127, 127, 127, 127, 1, 127, 3, 7, 6, 0, 1, 1, 1, 1, 1, 6, 6, 1, 127, 1, 65, 0, 11, 7, 50, 6, 3, 109, 117, 108, 0, 1, 5, 100, 105, 118, 95, 115, 0, 2, 5, 100, 105, 118, 95, 117, 0, 3, 5, 114, 101, 109, 95, 115, 0, 4, 5, 114, 101, 109, 95, 117, 0, 5, 8, 103, 101, 116, 95, 104, 105, 103, 104, 0, 0, 10, 191, 1, 6, 4, 0, 35, 0, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 126, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 127, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 128, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 129, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 130, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11])), {}).exports;
@@ -189,7 +251,6 @@ const _M0MPB7MyInt6412from__double = (a) => {
   }
   return { hi, lo };
 };
-const $bytes_literal$0 = new Uint8Array();
 function _M0TPC15bytes9BytesView(param0, param1, param2) {
   this.bytes = param0;
   this.start = param1;
@@ -200,29 +261,58 @@ function _M0TPC16buffer6Buffer(param0, param1) {
   this.data = param0;
   this.len = param1;
 }
+function _M0TP36mizchi5wacon3vfs5Inode(param0, param1, param2, param3, param4) {
+  this.itype = param0;
+  this.data = param1;
+  this.link_target = param2;
+  this.children = param3;
+  this.mode = param4;
+}
+function _M0TPB9ArrayViewGUsiEE(param0, param1, param2) {
+  this.buf = param0;
+  this.start = param1;
+  this.end = param2;
+}
+function _M0TP36mizchi5wacon3vfs3Vfs(param0, param1, param2, param3) {
+  this.inodes = param0;
+  this.fds = param1;
+  this.next_fd = param2;
+  this.cwd = param3;
+}
+function _M0TPB9ArrayViewGUiRP36mizchi5wacon3vfs8OpenFileEE(param0, param1, param2) {
+  this.buf = param0;
+  this.start = param1;
+  this.end = param2;
+}
+function _M0TPB9ArrayViewGcE(param0, param1, param2) {
+  this.buf = param0;
+  this.start = param1;
+  this.end = param2;
+}
+function _M0TP36mizchi5wacon3vfs8OpenFile(param0, param1, param2) {
+  this.inode_idx = param0;
+  this.offset = param1;
+  this.flags = param2;
+}
 function _M0TP36mizchi5wacon4rv643Fpu(param0, param1, param2) {
   this.regs = param0;
   this.fflags = param1;
   this.frm = param2;
 }
 const $0L = { hi: 0, lo: 0 };
-function $make_array_len_and_init(a, b) {
-  const arr = new Array(a);
-  arr.fill(b);
-  return arr;
-}
-function _M0TP36mizchi5wacon4rv643Cpu(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+function _M0TP36mizchi5wacon4rv643Cpu(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
   this.regs = param0;
   this.pc = param1;
   this.memory = param2;
   this.fpu = param3;
-  this.stdout = param4;
-  this.halted = param5;
-  this.exit_code = param6;
-  this.trace_syscalls = param7;
-  this.syscall_trace = param8;
-  this.last_syscall = param9;
-  this.repeat_count = param10;
+  this.vfs = param4;
+  this.stdout = param5;
+  this.halted = param6;
+  this.exit_code = param7;
+  this.trace_syscalls = param8;
+  this.syscall_trace = param9;
+  this.last_syscall = param10;
+  this.repeat_count = param11;
 }
 const $_1L = { hi: -1, lo: -1 };
 const $255L = { hi: 0, lo: 255 };
@@ -233,18 +323,26 @@ const $260L = { hi: 0, lo: 260 };
 const $325L = { hi: 0, lo: 325 };
 const $4294967295L = { hi: 0, lo: -1 };
 const $4L = { hi: 0, lo: 4 };
+const $8L = { hi: 0, lo: 8 };
+const $16L = { hi: 0, lo: 16 };
+const $18L = { hi: 0, lo: 18 };
+const $19L = { hi: 0, lo: 19 };
+const $1L = { hi: 0, lo: 1 };
+const $20L = { hi: 0, lo: 20 };
+const $48L = { hi: 0, lo: 48 };
+const $21523L = { hi: 0, lo: 21523 };
+const $24L = { hi: 0, lo: 24 };
+const $2L = { hi: 0, lo: 2 };
+const $80L = { hi: 0, lo: 80 };
+const $6L = { hi: 0, lo: 6 };
 const $_25L = { hi: -1, lo: -25 };
 const $_2L = { hi: -1, lo: -2 };
-const $1L = { hi: 0, lo: 1 };
-const $2L = { hi: 0, lo: 2 };
-const $8L = { hi: 0, lo: 8 };
 const $1048576L = { hi: 0, lo: 1048576 };
 const $_4096L = { hi: -1, lo: -4096 };
 const $_38L = { hi: -1, lo: -38 };
 const $3L = { hi: 0, lo: 3 };
 const $7L = { hi: 0, lo: 7 };
 const $15L = { hi: 0, lo: 15 };
-const $19L = { hi: 0, lo: 19 };
 const $31L = { hi: 0, lo: 31 };
 const $35L = { hi: 0, lo: 35 };
 const $4095L = { hi: 0, lo: 4095 };
@@ -254,7 +352,6 @@ const $1048575L = { hi: 0, lo: 1048575 };
 const $5L = { hi: 0, lo: 5 };
 const $32L = { hi: 0, lo: 32 };
 const $51L = { hi: 0, lo: 51 };
-const $6L = { hi: 0, lo: 6 };
 const $59L = { hi: 0, lo: 59 };
 const $1023L = { hi: 0, lo: 1023 };
 const $111L = { hi: 0, lo: 111 };
@@ -272,7 +369,6 @@ function $f32_reinterpret_i32(a) {
   $reinterpret_view.setInt32(0, a, true);
   return $reinterpret_view.getFloat32(0, true);
 }
-const $16L = { hi: 0, lo: 16 };
 const $127L = { hi: 0, lo: 127 };
 const $4294963200L = { hi: 0, lo: -4096 };
 const $65535L = { hi: 0, lo: 65535 };
@@ -294,18 +390,16 @@ function _M0TP36mizchi5wacon4rv647ElfInfo(param0, param1, param2, param3, param4
 const _M0FP46mizchi5wacon3cmd4wasm17js__write__stdout = (s) => { if (window.__wacon_write) window.__wacon_write(s); else console.log(s); };
 const _M0FP46mizchi5wacon3cmd4wasm18js__get__elf__data = () => { return window.__wacon_elf_data || new Uint8Array(0); };
 const _M0FP46mizchi5wacon3cmd4wasm13js__get__argv = () => { return window.__wacon_argv || "echo hello"; };
-function _M0TPB9ArrayViewGcE(param0, param1, param2) {
-  this.buf = param0;
-  this.start = param1;
-  this.end = param2;
-}
 const $256L = { hi: 0, lo: 256 };
 const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char };
 const _M0FPB19wasm__helper__cache = new _M0TPB15WasmHelperCache(false, undefined);
 const _M0FP36mizchi5wacon4rv649exec__fopN10sign__maskS190 = $_9223372036854775808L;
 const _M0FP36mizchi5wacon4rv649exec__fopN9val__maskS191 = $9223372036854775807L;
 const _M0FP36mizchi5wacon4rv649pie__base = $4194304L;
-const _M0FP36mizchi5wacon4rv6425expand__q2_2econstr_2f869 = $1048691L;
+const _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1377 = $1048691L;
+const _M0FPB4seed = _M0FPB12random__seed();
+const _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1053 = { _0: -2, _1: 0, _2: 0 };
+const _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1044 = { _0: -9, _1: 0, _2: 0 };
 function _M0FPC15abort5abortGuE(msg) {
   $panic();
 }
@@ -314,6 +408,15 @@ function _M0FPC15abort5abortGRPB9ArrayViewGyEE(msg) {
 }
 function _M0FPC15abort5abortGyE(msg) {
   return $panic();
+}
+function _M0MPB6Hasher8consume4(self, input) {
+  const _p = (self.acc >>> 0) + ((Math.imul(input, -1028477379) | 0) >>> 0) | 0;
+  const _p$2 = 17;
+  self.acc = Math.imul(_p << _p$2 | (_p >>> (32 - _p$2 | 0) | 0), 668265263) | 0;
+}
+function _M0MPB6Hasher13combine__uint(self, value) {
+  self.acc = (self.acc >>> 0) + (4 >>> 0) | 0;
+  _M0MPB6Hasher8consume4(self, value);
 }
 function _M0FPB5abortGuE(string, loc) {
   _M0FPC15abort5abortGuE(`${string}\n  at ${_M0IP016_24default__implPB4Show10to__stringGRPB9SourceLocE(loc)}\n`);
@@ -373,6 +476,24 @@ function _M0MPC16uint166UInt1623is__trailing__surrogate(self) {
 }
 function _M0FPB32code__point__of__surrogate__pair(leading, trailing) {
   return (((Math.imul(leading - 55296 | 0, 1024) | 0) + trailing | 0) - 56320 | 0) + 65536 | 0;
+}
+function _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self, index) {
+  const len = self.length;
+  if (index >= 0 && index < len) {
+    $bound_check(self, index);
+    return self[index];
+  } else {
+    return $panic();
+  }
+}
+function _M0MPC15array5Array2atGcE(self, index) {
+  const len = self.length;
+  if (index >= 0 && index < len) {
+    $bound_check(self, index);
+    return self[index];
+  } else {
+    return $panic();
+  }
 }
 function _M0MPB13SourceLocRepr5parse(repr) {
   const _bind = new _M0TPC16string10StringView(repr, 0, repr.length);
@@ -782,14 +903,26 @@ function _M0MPB13SourceLocRepr5parse(repr) {
 function _M0IPB13StringBuilderPB6Logger13write__string(self, str) {
   self.val = `${self.val}${str}`;
 }
+function _M0MPB6Hasher12combine__int(self, value) {
+  _M0MPB6Hasher13combine__uint(self, value);
+}
 function _M0MPB7MyInt649from__int(value) {
   return new _M0TPB7MyInt64(value >> 31 & -1, value | 0);
 }
 function _M0MPC13int3Int9to__int64(self) {
   return _M0MPB7MyInt649from__int(self);
 }
+function _M0MPB6Hasher7combineGsE(self, value) {
+  _M0IPC16string6StringPB4Hash13hash__combine(value, self);
+}
+function _M0MPB6Hasher7combineGiE(self, value) {
+  _M0IPC13int3IntPB4Hash13hash__combine(value, self);
+}
 function _M0IP016_24default__implPB2Eq10not__equalGlE(x, y) {
   return !_M0IPC15int645Int64PB2Eq5equal(x, y);
+}
+function _M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(x, y) {
+  return !_M0IP36mizchi5wacon3vfs9InodeTypePB2Eq5equal(x, y);
 }
 function _M0IP016_24default__implPB7Compare6op__ltGlE(x, y) {
   return _M0IPC15int645Int64PB7Compare7compare(x, y) < 0;
@@ -814,6 +947,41 @@ function _M0IP016_24default__implPB7Compare6op__geGmE(x, y) {
 }
 function _M0IP016_24default__implPB7Compare6op__geGkE(x, y) {
   return $compare_int(x, y) >= 0;
+}
+function _M0MPB6Hasher9avalanche(self) {
+  let acc = self.acc;
+  acc = acc ^ (acc >>> 15 | 0);
+  acc = Math.imul(acc, -2048144777) | 0;
+  acc = acc ^ (acc >>> 13 | 0);
+  acc = Math.imul(acc, -1028477379) | 0;
+  acc = acc ^ (acc >>> 16 | 0);
+  return acc;
+}
+function _M0MPB6Hasher8finalize(self) {
+  return _M0MPB6Hasher9avalanche(self);
+}
+function _M0MPB6Hasher11new_2einner(seed) {
+  return new _M0TPB6Hasher((seed >>> 0) + (374761393 >>> 0) | 0);
+}
+function _M0MPB6Hasher3new(seed$46$opt) {
+  let seed;
+  if (seed$46$opt === undefined) {
+    seed = _M0FPB4seed;
+  } else {
+    const _Some = seed$46$opt;
+    seed = _Some;
+  }
+  return _M0MPB6Hasher11new_2einner(seed);
+}
+function _M0IP016_24default__implPB4Hash4hashGsE(self) {
+  const h = _M0MPB6Hasher3new(undefined);
+  _M0MPB6Hasher7combineGsE(h, self);
+  return _M0MPB6Hasher8finalize(h);
+}
+function _M0IP016_24default__implPB4Hash4hashGiE(self) {
+  const h = _M0MPB6Hasher3new(undefined);
+  _M0MPB6Hasher7combineGiE(h, self);
+  return _M0MPB6Hasher8finalize(h);
 }
 function _M0MPC16string6String11sub_2einner(self, start, end) {
   const len = self.length;
@@ -861,8 +1029,15 @@ function _M0MPB4Iter4nextGcE(self) {
   const _func = self;
   return _func();
 }
+function _M0MPB4Iter4nextGUsiEE(self) {
+  const _func = self;
+  return _func();
+}
 function _M0MPC13int3Int18to__string_2einner(self, radix) {
   return _M0FPB19int__to__string__js(self, radix);
+}
+function _M0MPC15int645Int6418to__string_2einner(self, radix) {
+  return _M0FPB21int64__to__string__js(self, radix);
 }
 function _M0FPB19unsafe__sub__string(_tmp, _tmp$2, _tmp$3) {
   return $unsafe_bytes_sub_string(_tmp, _tmp$2, _tmp$3);
@@ -943,6 +1118,9 @@ function _M0MPC16string6String11from__array(chars) {
 function _M0IPB13StringBuilderPB6Logger11write__view(self, str) {
   self.val = `${self.val}${_M0IPC16string10StringViewPB4Show10to__string(str)}`;
 }
+function _M0MPC15array5Array11new_2einnerGcE(capacity) {
+  return [];
+}
 function _M0MPC15array5Array4pushGlE(self, value) {
   _M0MPB7JSArray4push(self, value);
 }
@@ -973,6 +1151,25 @@ function _M0MPC16string6String4iter(self) {
     }
   };
   return _p;
+}
+function _M0MPC16string6String9to__array(self) {
+  const _p = _M0MPC16string6String4iter(self);
+  const _p$2 = _M0MPC15array5Array11new_2einnerGcE(self.length);
+  let _p$3 = _p$2;
+  while (true) {
+    const _p$4 = _M0MPB4Iter4nextGcE(_p);
+    if (_p$4 === -1) {
+      break;
+    } else {
+      const _p$5 = _p$4;
+      const _p$6 = _p$5;
+      const _p$7 = _p$3;
+      _M0MPC15array5Array4pushGcE(_p$7, _p$6);
+      _p$3 = _p$7;
+      continue;
+    }
+  }
+  return _p$3;
 }
 function _M0IPC13int3IntPB4Show6output(self, logger) {
   logger.method_table.method_0(logger.self, _M0MPC13int3Int18to__string_2einner(self, 10));
@@ -1006,6 +1203,576 @@ function _M0MPC15array10FixedArray12view_2einnerGyE(self, start, end) {
     return _M0FPB5abortGRPB9ArrayViewGyEE("View index out of bounds", "@moonbitlang/core/builtin:arrayview.mbt:451:5-451:38");
   }
 }
+function _M0MPC13int3Int20next__power__of__two(self) {
+  if (self >= 0) {
+    if (self <= 1) {
+      return 1;
+    }
+    if (self > 1073741824) {
+      return 1073741824;
+    }
+    return (2147483647 >> (Math.clz32(self - 1 | 0) - 1 | 0)) + 1 | 0;
+  } else {
+    return $panic();
+  }
+}
+function _M0MPB3Map11new_2einnerGsiE(capacity) {
+  const capacity$2 = _M0MPC13int3Int20next__power__of__two(capacity);
+  const _bind = capacity$2 - 1 | 0;
+  const _bind$2 = (Math.imul(capacity$2, 13) | 0) / 16 | 0;
+  const _bind$3 = $make_array_len_and_init(capacity$2, undefined);
+  const _bind$4 = undefined;
+  return new _M0TPB3MapGsiE(_bind$3, 0, capacity$2, _bind, _bind$2, _bind$4, -1);
+}
+function _M0MPB3Map11new_2einnerGiRP36mizchi5wacon3vfs8OpenFileE(capacity) {
+  const capacity$2 = _M0MPC13int3Int20next__power__of__two(capacity);
+  const _bind = capacity$2 - 1 | 0;
+  const _bind$2 = (Math.imul(capacity$2, 13) | 0) / 16 | 0;
+  const _bind$3 = $make_array_len_and_init(capacity$2, undefined);
+  const _bind$4 = undefined;
+  return new _M0TPB3MapGiRP36mizchi5wacon3vfs8OpenFileE(_bind$3, 0, capacity$2, _bind, _bind$2, _bind$4, -1);
+}
+function _M0MPB3Map20add__entry__to__tailGsiE(self, idx, entry) {
+  const _bind = self.tail;
+  if (_bind === -1) {
+    self.head = entry;
+  } else {
+    const _tmp = self.entries;
+    $bound_check(_tmp, _bind);
+    const _p = _tmp[_bind];
+    let _tmp$2;
+    if (_p === undefined) {
+      _tmp$2 = $panic();
+    } else {
+      const _p$2 = _p;
+      _tmp$2 = _p$2;
+    }
+    _tmp$2.next = entry;
+  }
+  self.tail = idx;
+  const _tmp = self.entries;
+  $bound_check(_tmp, idx);
+  _tmp[idx] = entry;
+  self.size = self.size + 1 | 0;
+}
+function _M0MPB3Map20add__entry__to__tailGiRP36mizchi5wacon3vfs8OpenFileE(self, idx, entry) {
+  const _bind = self.tail;
+  if (_bind === -1) {
+    self.head = entry;
+  } else {
+    const _tmp = self.entries;
+    $bound_check(_tmp, _bind);
+    const _p = _tmp[_bind];
+    let _tmp$2;
+    if (_p === undefined) {
+      _tmp$2 = $panic();
+    } else {
+      const _p$2 = _p;
+      _tmp$2 = _p$2;
+    }
+    _tmp$2.next = entry;
+  }
+  self.tail = idx;
+  const _tmp = self.entries;
+  $bound_check(_tmp, idx);
+  _tmp[idx] = entry;
+  self.size = self.size + 1 | 0;
+}
+function _M0MPB3Map10set__entryGsiE(self, entry, new_idx) {
+  const _tmp = self.entries;
+  $bound_check(_tmp, new_idx);
+  _tmp[new_idx] = entry;
+  const _bind = entry.next;
+  if (_bind === undefined) {
+    self.tail = new_idx;
+    return;
+  } else {
+    const _Some = _bind;
+    const _next = _Some;
+    _next.prev = new_idx;
+    return;
+  }
+}
+function _M0MPB3Map10set__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, entry, new_idx) {
+  const _tmp = self.entries;
+  $bound_check(_tmp, new_idx);
+  _tmp[new_idx] = entry;
+  const _bind = entry.next;
+  if (_bind === undefined) {
+    self.tail = new_idx;
+    return;
+  } else {
+    const _Some = _bind;
+    const _next = _Some;
+    _next.prev = new_idx;
+    return;
+  }
+}
+function _M0MPB3Map10push__awayGsiE(self, idx, entry) {
+  let _tmp = entry.psl + 1 | 0;
+  let _tmp$2 = idx + 1 & self.capacity_mask;
+  let _tmp$3 = entry;
+  while (true) {
+    const psl = _tmp;
+    const idx$2 = _tmp$2;
+    const entry$2 = _tmp$3;
+    const _tmp$4 = self.entries;
+    $bound_check(_tmp$4, idx$2);
+    const _bind = _tmp$4[idx$2];
+    if (_bind === undefined) {
+      entry$2.psl = psl;
+      _M0MPB3Map10set__entryGsiE(self, entry$2, idx$2);
+      return;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (psl > _curr_entry.psl) {
+        entry$2.psl = psl;
+        _M0MPB3Map10set__entryGsiE(self, entry$2, idx$2);
+        _tmp = _curr_entry.psl + 1 | 0;
+        _tmp$2 = idx$2 + 1 & self.capacity_mask;
+        _tmp$3 = _curr_entry;
+        continue;
+      } else {
+        _tmp = psl + 1 | 0;
+        _tmp$2 = idx$2 + 1 & self.capacity_mask;
+        continue;
+      }
+    }
+  }
+}
+function _M0MPB3Map10push__awayGiRP36mizchi5wacon3vfs8OpenFileE(self, idx, entry) {
+  let _tmp = entry.psl + 1 | 0;
+  let _tmp$2 = idx + 1 & self.capacity_mask;
+  let _tmp$3 = entry;
+  while (true) {
+    const psl = _tmp;
+    const idx$2 = _tmp$2;
+    const entry$2 = _tmp$3;
+    const _tmp$4 = self.entries;
+    $bound_check(_tmp$4, idx$2);
+    const _bind = _tmp$4[idx$2];
+    if (_bind === undefined) {
+      entry$2.psl = psl;
+      _M0MPB3Map10set__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, entry$2, idx$2);
+      return;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (psl > _curr_entry.psl) {
+        entry$2.psl = psl;
+        _M0MPB3Map10set__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, entry$2, idx$2);
+        _tmp = _curr_entry.psl + 1 | 0;
+        _tmp$2 = idx$2 + 1 & self.capacity_mask;
+        _tmp$3 = _curr_entry;
+        continue;
+      } else {
+        _tmp = psl + 1 | 0;
+        _tmp$2 = idx$2 + 1 & self.capacity_mask;
+        continue;
+      }
+    }
+  }
+}
+function _M0MPB3Map15set__with__hashGsiE(self, key, value, hash) {
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const psl = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      if (self.size >= self.grow_at) {
+        _M0MPB3Map4growGsiE(self);
+        _tmp = 0;
+        _tmp$2 = hash & self.capacity_mask;
+        continue;
+      }
+      const _bind$2 = self.tail;
+      const _bind$3 = undefined;
+      const entry = new _M0TPB5EntryGsiE(_bind$2, _bind$3, psl, hash, key, value);
+      _M0MPB3Map20add__entry__to__tailGsiE(self, idx, entry);
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (_curr_entry.hash === hash && _curr_entry.key === key) {
+        _curr_entry.value = value;
+        return undefined;
+      }
+      if (psl > _curr_entry.psl) {
+        if (self.size >= self.grow_at) {
+          _M0MPB3Map4growGsiE(self);
+          _tmp = 0;
+          _tmp$2 = hash & self.capacity_mask;
+          continue;
+        }
+        _M0MPB3Map10push__awayGsiE(self, idx, _curr_entry);
+        const _bind$2 = self.tail;
+        const _bind$3 = undefined;
+        const entry = new _M0TPB5EntryGsiE(_bind$2, _bind$3, psl, hash, key, value);
+        _M0MPB3Map20add__entry__to__tailGsiE(self, idx, entry);
+        return undefined;
+      }
+      _tmp = psl + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map15set__with__hashGiRP36mizchi5wacon3vfs8OpenFileE(self, key, value, hash) {
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const psl = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      if (self.size >= self.grow_at) {
+        _M0MPB3Map4growGiRP36mizchi5wacon3vfs8OpenFileE(self);
+        _tmp = 0;
+        _tmp$2 = hash & self.capacity_mask;
+        continue;
+      }
+      const _bind$2 = self.tail;
+      const _bind$3 = undefined;
+      const entry = new _M0TPB5EntryGiRP36mizchi5wacon3vfs8OpenFileE(_bind$2, _bind$3, psl, hash, key, value);
+      _M0MPB3Map20add__entry__to__tailGiRP36mizchi5wacon3vfs8OpenFileE(self, idx, entry);
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (_curr_entry.hash === hash && _curr_entry.key === key) {
+        _curr_entry.value = value;
+        return undefined;
+      }
+      if (psl > _curr_entry.psl) {
+        if (self.size >= self.grow_at) {
+          _M0MPB3Map4growGiRP36mizchi5wacon3vfs8OpenFileE(self);
+          _tmp = 0;
+          _tmp$2 = hash & self.capacity_mask;
+          continue;
+        }
+        _M0MPB3Map10push__awayGiRP36mizchi5wacon3vfs8OpenFileE(self, idx, _curr_entry);
+        const _bind$2 = self.tail;
+        const _bind$3 = undefined;
+        const entry = new _M0TPB5EntryGiRP36mizchi5wacon3vfs8OpenFileE(_bind$2, _bind$3, psl, hash, key, value);
+        _M0MPB3Map20add__entry__to__tailGiRP36mizchi5wacon3vfs8OpenFileE(self, idx, entry);
+        return undefined;
+      }
+      _tmp = psl + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map4growGsiE(self) {
+  const old_head = self.head;
+  const new_capacity = self.capacity << 1;
+  self.entries = $make_array_len_and_init(new_capacity, undefined);
+  self.capacity = new_capacity;
+  self.capacity_mask = new_capacity - 1 | 0;
+  const _p = self.capacity;
+  self.grow_at = (Math.imul(_p, 13) | 0) / 16 | 0;
+  self.size = 0;
+  self.head = undefined;
+  self.tail = -1;
+  let _tmp = old_head;
+  while (true) {
+    const _param = _tmp;
+    if (_param === undefined) {
+      return;
+    } else {
+      const _Some = _param;
+      const _x = _Some;
+      const _next = _x.next;
+      const _key = _x.key;
+      const _value = _x.value;
+      const _hash = _x.hash;
+      _M0MPB3Map15set__with__hashGsiE(self, _key, _value, _hash);
+      _tmp = _next;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map4growGiRP36mizchi5wacon3vfs8OpenFileE(self) {
+  const old_head = self.head;
+  const new_capacity = self.capacity << 1;
+  self.entries = $make_array_len_and_init(new_capacity, undefined);
+  self.capacity = new_capacity;
+  self.capacity_mask = new_capacity - 1 | 0;
+  const _p = self.capacity;
+  self.grow_at = (Math.imul(_p, 13) | 0) / 16 | 0;
+  self.size = 0;
+  self.head = undefined;
+  self.tail = -1;
+  let _tmp = old_head;
+  while (true) {
+    const _param = _tmp;
+    if (_param === undefined) {
+      return;
+    } else {
+      const _Some = _param;
+      const _x = _Some;
+      const _next = _x.next;
+      const _key = _x.key;
+      const _value = _x.value;
+      const _hash = _x.hash;
+      _M0MPB3Map15set__with__hashGiRP36mizchi5wacon3vfs8OpenFileE(self, _key, _value, _hash);
+      _tmp = _next;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map3setGsiE(self, key, value) {
+  _M0MPB3Map15set__with__hashGsiE(self, key, value, _M0IP016_24default__implPB4Hash4hashGsE(key));
+}
+function _M0MPB3Map3setGiRP36mizchi5wacon3vfs8OpenFileE(self, key, value) {
+  _M0MPB3Map15set__with__hashGiRP36mizchi5wacon3vfs8OpenFileE(self, key, value, _M0IP016_24default__implPB4Hash4hashGiE(key));
+}
+function _M0MPB3Map11from__arrayGsiE(arr) {
+  const length = arr.end - arr.start | 0;
+  let capacity = _M0MPC13int3Int20next__power__of__two(length);
+  const _p = capacity;
+  if (length > ((Math.imul(_p, 13) | 0) / 16 | 0)) {
+    capacity = Math.imul(capacity, 2) | 0;
+  }
+  const m = _M0MPB3Map11new_2einnerGsiE(capacity);
+  const _bind = arr.end - arr.start | 0;
+  let _tmp = 0;
+  while (true) {
+    const _ = _tmp;
+    if (_ < _bind) {
+      const e = arr.buf[arr.start + _ | 0];
+      _M0MPB3Map3setGsiE(m, e._0, e._1);
+      _tmp = _ + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  return m;
+}
+function _M0MPB3Map11from__arrayGiRP36mizchi5wacon3vfs8OpenFileE(arr) {
+  const length = arr.end - arr.start | 0;
+  let capacity = _M0MPC13int3Int20next__power__of__two(length);
+  const _p = capacity;
+  if (length > ((Math.imul(_p, 13) | 0) / 16 | 0)) {
+    capacity = Math.imul(capacity, 2) | 0;
+  }
+  const m = _M0MPB3Map11new_2einnerGiRP36mizchi5wacon3vfs8OpenFileE(capacity);
+  const _bind = arr.end - arr.start | 0;
+  let _tmp = 0;
+  while (true) {
+    const _ = _tmp;
+    if (_ < _bind) {
+      const e = arr.buf[arr.start + _ | 0];
+      _M0MPB3Map3setGiRP36mizchi5wacon3vfs8OpenFileE(m, e._0, e._1);
+      _tmp = _ + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  return m;
+}
+function _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self, key) {
+  const hash = _M0IP016_24default__implPB4Hash4hashGiE(key);
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const i = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _entry = _Some;
+      if (_entry.hash === hash && _entry.key === key) {
+        return _entry.value;
+      }
+      if (i > _entry.psl) {
+        return undefined;
+      }
+      _tmp = i + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map3getGsiE(self, key) {
+  const hash = _M0IP016_24default__implPB4Hash4hashGsE(key);
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const i = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _entry = _Some;
+      if (_entry.hash === hash && _entry.key === key) {
+        return _entry.value;
+      }
+      if (i > _entry.psl) {
+        return undefined;
+      }
+      _tmp = i + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map8containsGiRP36mizchi5wacon3vfs8OpenFileE(self, key) {
+  const hash = _M0IP016_24default__implPB4Hash4hashGiE(key);
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const i = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      return false;
+    } else {
+      const _Some = _bind;
+      const _entry = _Some;
+      if (_entry.hash === hash && _entry.key === key) {
+        return true;
+      }
+      if (i > _entry.psl) {
+        return false;
+      }
+      _tmp = i + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map13remove__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, entry) {
+  const _bind = entry.prev;
+  if (_bind === -1) {
+    self.head = entry.next;
+  } else {
+    const _tmp = self.entries;
+    $bound_check(_tmp, _bind);
+    const _p = _tmp[_bind];
+    let _tmp$2;
+    if (_p === undefined) {
+      _tmp$2 = $panic();
+    } else {
+      const _p$2 = _p;
+      _tmp$2 = _p$2;
+    }
+    _tmp$2.next = entry.next;
+  }
+  const _bind$2 = entry.next;
+  if (_bind$2 === undefined) {
+    self.tail = entry.prev;
+    return;
+  } else {
+    const _Some = _bind$2;
+    const _next = _Some;
+    _next.prev = entry.prev;
+    return;
+  }
+}
+function _M0MPB3Map11shift__backGiRP36mizchi5wacon3vfs8OpenFileE(self, idx) {
+  let _tmp = idx;
+  while (true) {
+    const idx$2 = _tmp;
+    const next = idx$2 + 1 & self.capacity_mask;
+    _L: {
+      const _tmp$2 = self.entries;
+      $bound_check(_tmp$2, next);
+      const _bind = _tmp$2[next];
+      if (_bind === undefined) {
+        break _L;
+      } else {
+        const _Some = _bind;
+        const _x = _Some;
+        const _x$2 = _x.psl;
+        if (_x$2 === 0) {
+          break _L;
+        } else {
+          _x.psl = _x.psl - 1 | 0;
+          _M0MPB3Map10set__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, _x, idx$2);
+          _tmp = next;
+          continue;
+        }
+      }
+    }
+    const _tmp$2 = self.entries;
+    $bound_check(_tmp$2, idx$2);
+    _tmp$2[idx$2] = undefined;
+    return;
+  }
+}
+function _M0MPB3Map18remove__with__hashGiRP36mizchi5wacon3vfs8OpenFileE(self, key, hash) {
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const i = _tmp;
+    const idx = _tmp$2;
+    const _tmp$3 = self.entries;
+    $bound_check(_tmp$3, idx);
+    const _bind = _tmp$3[idx];
+    if (_bind === undefined) {
+      return;
+    } else {
+      const _Some = _bind;
+      const _entry = _Some;
+      if (_entry.hash === hash && _entry.key === key) {
+        _M0MPB3Map13remove__entryGiRP36mizchi5wacon3vfs8OpenFileE(self, _entry);
+        _M0MPB3Map11shift__backGiRP36mizchi5wacon3vfs8OpenFileE(self, idx);
+        self.size = self.size - 1 | 0;
+        return;
+      }
+      if (i > _entry.psl) {
+        return;
+      }
+      _tmp = i + 1 | 0;
+      _tmp$2 = idx + 1 & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map6removeGiRP36mizchi5wacon3vfs8OpenFileE(self, key) {
+  _M0MPB3Map18remove__with__hashGiRP36mizchi5wacon3vfs8OpenFileE(self, key, _M0IP016_24default__implPB4Hash4hashGiE(key));
+}
+function _M0MPB3Map4iterGsiE(self) {
+  const curr_entry = new _M0TPC13ref3RefGORPB5EntryGsiEE(self.head);
+  const _p = () => {
+    const _bind = curr_entry.val;
+    if (_bind === undefined) {
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _x = _Some;
+      const _key = _x.key;
+      const _value = _x.value;
+      const _next = _x.next;
+      curr_entry.val = _next;
+      return { _0: _key, _1: _value };
+    }
+  };
+  return _p;
+}
+function _M0MPB3Map5iter2GsiE(self) {
+  return _M0MPB3Map4iterGsiE(self);
+}
 function _M0MPC16double6Double15convert__uint64(value) {
   return _M0MPB7MyInt6422convert__to__double__u(value);
 }
@@ -1014,6 +1781,18 @@ function _M0MPC16uint646UInt6410to__double(self) {
 }
 function _M0MPC15int645Int6423reinterpret__as__double(self) {
   return _M0MPB7MyInt6423reinterpret__as__double(self);
+}
+function _M0MPB5Iter24nextGsiE(self) {
+  return _M0MPB4Iter4nextGUsiEE(self);
+}
+function _M0MPC15bytes5Bytes4make(len, init) {
+  if (len < 0) {
+    return $bytes_literal$0;
+  }
+  return $makebytes(len, init);
+}
+function _M0MPC15bytes5Bytes3new(len) {
+  return _M0MPC15bytes5Bytes4make(len, 0);
 }
 function _M0IPB7MyInt64PB3Neg3neg(self) {
   return self.lo === 0 ? new _M0TPB7MyInt64(~self.hi + 1 | 0, 0) : new _M0TPB7MyInt64(~self.hi, ~self.lo + 1 | 0);
@@ -1284,6 +2063,26 @@ function _M0IPC16uint646UInt64PB7Compare7compare(self, other) {
 }
 function _M0IPC16uint646UInt64PB3Shr3shr(self, shift) {
   return _M0MPB7MyInt643lsr(self, shift);
+}
+function _M0MPB6Hasher15combine__string(self, value) {
+  const _bind = value.length;
+  let _tmp = 0;
+  while (true) {
+    const i = _tmp;
+    if (i < _bind) {
+      _M0MPB6Hasher13combine__uint(self, value.charCodeAt(i));
+      _tmp = i + 1 | 0;
+      continue;
+    } else {
+      return;
+    }
+  }
+}
+function _M0IPC16string6StringPB4Hash13hash__combine(self, hasher) {
+  _M0MPB6Hasher15combine__string(hasher, self);
+}
+function _M0IPC13int3IntPB4Hash13hash__combine(self, hasher) {
+  _M0MPB6Hasher12combine__int(hasher, self);
 }
 function _M0MPC16double6Double9to__int64(self) {
   return _M0MPB7MyInt6412from__double(self);
@@ -2511,11 +3310,425 @@ function _M0FPC28encoding4utf821decode__lossy_2einner(bytes, ignore_bom) {
   }
   return _M0MPC15bytes5Bytes29to__unchecked__string_2einner(t, 0, tlen);
 }
+function _M0IP36mizchi5wacon3vfs9InodeTypePB2Eq5equal(_x_111, _x_112) {
+  switch (_x_111) {
+    case 0: {
+      if (_x_112 === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    case 1: {
+      if (_x_112 === 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    default: {
+      if (_x_112 === 2) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs3new() {
+  const _tmp = _M0MPC15bytes5Bytes3new(0);
+  const _bind = [];
+  const root = new _M0TP36mizchi5wacon3vfs5Inode(1, _tmp, "", _M0MPB3Map11from__arrayGsiE(new _M0TPB9ArrayViewGUsiEE(_bind, 0, 0)), 493);
+  const _tmp$2 = [root];
+  const _bind$2 = [];
+  return new _M0TP36mizchi5wacon3vfs3Vfs(_tmp$2, _M0MPB3Map11from__arrayGiRP36mizchi5wacon3vfs8OpenFileE(new _M0TPB9ArrayViewGUiRP36mizchi5wacon3vfs8OpenFileEE(_bind$2, 0, 0)), 10, 0);
+}
+function _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, parent, name) {
+  const idx = self.inodes.length;
+  const _tmp = _M0MPC15bytes5Bytes3new(0);
+  const _bind = [];
+  const inode = new _M0TP36mizchi5wacon3vfs5Inode(1, _tmp, "", _M0MPB3Map11from__arrayGsiE(new _M0TPB9ArrayViewGUsiEE(_bind, 0, 0)), 493);
+  _M0MPC15array5Array4pushGlE(self.inodes, inode);
+  _M0MPB3Map3setGsiE(_M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, parent).children, name, idx);
+  return idx;
+}
+function _M0MP36mizchi5wacon3vfs3Vfs6mkfile(self, parent, name, data) {
+  const idx = self.inodes.length;
+  const _bind = [];
+  const inode = new _M0TP36mizchi5wacon3vfs5Inode(0, data, "", _M0MPB3Map11from__arrayGsiE(new _M0TPB9ArrayViewGUsiEE(_bind, 0, 0)), 420);
+  _M0MPC15array5Array4pushGlE(self.inodes, inode);
+  _M0MPB3Map3setGsiE(_M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, parent).children, name, idx);
+  return idx;
+}
+function _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, parent, name, content) {
+  return _M0MP36mizchi5wacon3vfs3Vfs6mkfile(self, parent, name, _M0FPC28encoding4utf814encode_2einner(new _M0TPC16string10StringView(content, 0, content.length), false));
+}
+function _M0MP36mizchi5wacon3vfs3Vfs9mksymlink(self, parent, name, target) {
+  const idx = self.inodes.length;
+  const _tmp = _M0MPC15bytes5Bytes3new(0);
+  const _bind = [];
+  const inode = new _M0TP36mizchi5wacon3vfs5Inode(2, _tmp, target, _M0MPB3Map11from__arrayGsiE(new _M0TPB9ArrayViewGUsiEE(_bind, 0, 0)), 511);
+  _M0MPC15array5Array4pushGlE(self.inodes, inode);
+  _M0MPB3Map3setGsiE(_M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, parent).children, name, idx);
+  return idx;
+}
+function _M0FP36mizchi5wacon3vfs11split__path(path) {
+  const parts = [];
+  const current = [];
+  const _it = _M0MPC16string6String4iter(path);
+  while (true) {
+    const _bind = _M0MPB4Iter4nextGcE(_it);
+    if (_bind === -1) {
+      break;
+    } else {
+      const _Some = _bind;
+      const _c = _Some;
+      if (_c === 47) {
+        if (current.length > 0) {
+          _M0MPC15array5Array4pushGlE(parts, _M0MPC16string6String11from__array(new _M0TPB9ArrayViewGcE(current, 0, current.length)));
+          _M0MPC15array5Array5clearGcE(current);
+        }
+      } else {
+        _M0MPC15array5Array4pushGcE(current, _c);
+      }
+      continue;
+    }
+  }
+  if (current.length > 0) {
+    _M0MPC15array5Array4pushGlE(parts, _M0MPC16string6String11from__array(new _M0TPB9ArrayViewGcE(current, 0, current.length)));
+  }
+  return parts;
+}
+function _M0MP36mizchi5wacon3vfs3Vfs13resolve__from(self, start, path, depth) {
+  let _tmp = start;
+  let _tmp$2 = path;
+  let _tmp$3 = depth;
+  while (true) {
+    const start$2 = _tmp;
+    const path$2 = _tmp$2;
+    const depth$2 = _tmp$3;
+    if (depth$2 > 16) {
+      return undefined;
+    }
+    const parts = _M0FP36mizchi5wacon3vfs11split__path(path$2);
+    let current = _M0MPC16string6String9to__array(path$2).length > 0 && _M0MPC15array5Array2atGcE(_M0MPC16string6String9to__array(path$2), 0) === 47 ? 0 : start$2;
+    const _bind = parts.length;
+    let _tmp$4 = 0;
+    while (true) {
+      const _ = _tmp$4;
+      if (_ < _bind) {
+        const part = parts[_];
+        _L: {
+          if (part === "" || part === ".") {
+            break _L;
+          }
+          if (part === "..") {
+            current = 0;
+            break _L;
+          }
+          const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, current);
+          if (_M0IP36mizchi5wacon3vfs9InodeTypePB2Eq5equal(inode.itype, 2)) {
+            const _bind$2 = _M0MP36mizchi5wacon3vfs3Vfs13resolve__from(self, 0, inode.link_target, depth$2 + 1 | 0);
+            if (_bind$2 === undefined) {
+              return undefined;
+            } else {
+              const _Some = _bind$2;
+              const _idx = _Some;
+              current = _idx;
+            }
+          }
+          const inode$2 = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, current);
+          if (_M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(inode$2.itype, 1)) {
+            return undefined;
+          }
+          const _bind$2 = _M0MPB3Map3getGsiE(inode$2.children, part);
+          if (_bind$2 === undefined) {
+            return undefined;
+          } else {
+            const _Some = _bind$2;
+            const _idx = _Some;
+            current = _idx;
+          }
+          break _L;
+        }
+        _tmp$4 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, current);
+    if (_M0IP36mizchi5wacon3vfs9InodeTypePB2Eq5equal(inode.itype, 2)) {
+      _tmp = 0;
+      _tmp$2 = inode.link_target;
+      _tmp$3 = depth$2 + 1 | 0;
+      continue;
+    }
+    return current;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs7resolve(self, path) {
+  return _M0MP36mizchi5wacon3vfs3Vfs13resolve__from(self, self.cwd, path, 0);
+}
+function _M0MP36mizchi5wacon3vfs3Vfs4open(self, dir_fd, path, flags) {
+  const start = dir_fd === -100 ? self.cwd : dir_fd;
+  const resolved = _M0MP36mizchi5wacon3vfs3Vfs13resolve__from(self, start, path, 0);
+  if (resolved === undefined) {
+    return -2;
+  } else {
+    const _Some = resolved;
+    const _idx = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _idx);
+    if ((flags & 65536) !== 0 && _M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(inode.itype, 1)) {
+      return -20;
+    }
+    const fd = self.next_fd;
+    self.next_fd = self.next_fd + 1 | 0;
+    _M0MPB3Map3setGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd, new _M0TP36mizchi5wacon3vfs8OpenFile(_idx, 0, flags));
+    return fd;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs4read(self, fd, count) {
+  const _bind = _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
+  if (_bind === undefined) {
+    return { _0: _M0MPC15bytes5Bytes3new(0), _1: -9 };
+  } else {
+    const _Some = _bind;
+    const _of = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _of.inode_idx);
+    if (_M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(inode.itype, 0)) {
+      return { _0: _M0MPC15bytes5Bytes3new(0), _1: -21 };
+    }
+    const remaining = inode.data.length - _of.offset | 0;
+    const to_read = count < remaining ? count : remaining;
+    if (to_read <= 0) {
+      return { _0: _M0MPC15bytes5Bytes3new(0), _1: 0 };
+    }
+    const buf = [];
+    let _tmp = 0;
+    while (true) {
+      const i = _tmp;
+      if (i < to_read) {
+        const _tmp$2 = inode.data;
+        const _tmp$3 = _of.offset + i | 0;
+        $bound_check(_tmp$2, _tmp$3);
+        _M0MPC15array5Array4pushGyE(buf, _tmp$2[_tmp$3]);
+        _tmp = i + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    _of.offset = _of.offset + to_read | 0;
+    return { _0: _M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(buf, 0, buf.length)), _1: to_read };
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs5close(self, fd) {
+  if (_M0MPB3Map8containsGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd)) {
+    _M0MPB3Map6removeGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
+    return 0;
+  } else {
+    return -9;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs5fstat(self, fd) {
+  const _bind = _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
+  if (_bind === undefined) {
+    return _M0FP36mizchi5wacon3vfs20fstat_2etuple_2f1044;
+  } else {
+    const _Some = _bind;
+    const _of = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _of.inode_idx);
+    const _bind$2 = inode.itype;
+    let mode;
+    switch (_bind$2) {
+      case 0: {
+        mode = 32768 | inode.mode;
+        break;
+      }
+      case 1: {
+        mode = 16384 | inode.mode;
+        break;
+      }
+      default: {
+        mode = 40960 | inode.mode;
+      }
+    }
+    return { _0: 0, _1: mode, _2: inode.data.length };
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs4stat(self, path) {
+  const _bind = _M0MP36mizchi5wacon3vfs3Vfs7resolve(self, path);
+  if (_bind === undefined) {
+    return _M0FP36mizchi5wacon3vfs19stat_2etuple_2f1053;
+  } else {
+    const _Some = _bind;
+    const _idx = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _idx);
+    const _bind$2 = inode.itype;
+    let mode;
+    switch (_bind$2) {
+      case 0: {
+        mode = 32768 | inode.mode;
+        break;
+      }
+      case 1: {
+        mode = 16384 | inode.mode;
+        break;
+      }
+      default: {
+        mode = 40960 | inode.mode;
+      }
+    }
+    return { _0: 0, _1: mode, _2: inode.data.length };
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs7readdir(self, fd) {
+  const _bind = _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
+  if (_bind === undefined) {
+    return [];
+  } else {
+    const _Some = _bind;
+    const _of = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _of.inode_idx);
+    if (_M0IP016_24default__implPB2Eq10not__equalGRP36mizchi5wacon3vfs9InodeTypeE(inode.itype, 1)) {
+      return [];
+    }
+    const entries = [];
+    const _it = _M0MPB3Map5iter2GsiE(inode.children);
+    while (true) {
+      const _bind$2 = _M0MPB5Iter24nextGsiE(_it);
+      if (_bind$2 === undefined) {
+        break;
+      } else {
+        const _Some$2 = _bind$2;
+        const _x = _Some$2;
+        const _name = _x._0;
+        const _idx = _x._1;
+        _M0MPC15array5Array4pushGlE(entries, { _0: _name, _1: _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _idx).itype });
+        continue;
+      }
+    }
+    return entries;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs8readlink(self, path) {
+  const parts = _M0FP36mizchi5wacon3vfs11split__path(path);
+  let current = _M0MPC16string6String9to__array(path).length > 0 && _M0MPC15array5Array2atGcE(_M0MPC16string6String9to__array(path), 0) === 47 ? 0 : self.cwd;
+  const _bind = parts.length - 1 | 0;
+  let _tmp = 0;
+  while (true) {
+    const i = _tmp;
+    if (i < _bind) {
+      _L: {
+        const part = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(parts, i);
+        if (part === "" || part === ".") {
+          break _L;
+        }
+        const _bind$2 = _M0MPB3Map3getGsiE(_M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, current).children, part);
+        if (_bind$2 === undefined) {
+          return undefined;
+        } else {
+          const _Some = _bind$2;
+          const _idx = _Some;
+          current = _idx;
+        }
+        break _L;
+      }
+      _tmp = i + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  if (parts.length > 0) {
+    const last = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(parts, parts.length - 1 | 0);
+    const _bind$2 = _M0MPB3Map3getGsiE(_M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, current).children, last);
+    if (_bind$2 === undefined) {
+      return undefined;
+    } else {
+      const _Some = _bind$2;
+      const _idx = _Some;
+      const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _idx);
+      return _M0IP36mizchi5wacon3vfs9InodeTypePB2Eq5equal(inode.itype, 2) ? inode.link_target : undefined;
+    }
+  } else {
+    return undefined;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs5lseek(self, fd, offset, whence) {
+  const _bind = _M0MPB3Map3getGiRP36mizchi5wacon3vfs8OpenFileE(self.fds, fd);
+  if (_bind === undefined) {
+    return -9;
+  } else {
+    const _Some = _bind;
+    const _of = _Some;
+    const inode = _M0MPC15array5Array2atGRP36mizchi5wacon3vfs5InodeE(self.inodes, _of.inode_idx);
+    let new_offset;
+    switch (whence) {
+      case 0: {
+        new_offset = offset;
+        break;
+      }
+      case 1: {
+        new_offset = _of.offset + offset | 0;
+        break;
+      }
+      case 2: {
+        new_offset = inode.data.length + offset | 0;
+        break;
+      }
+      default: {
+        return -22;
+      }
+    }
+    _of.offset = new_offset;
+    return new_offset;
+  }
+}
+function _M0MP36mizchi5wacon3vfs3Vfs12init__alpine(self) {
+  const bin = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "bin");
+  const dev = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "dev");
+  const etc = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "etc");
+  const proc = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "proc");
+  const proc_self = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, proc, "self");
+  const usr = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "usr");
+  const usr_bin = _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, usr, "bin");
+  _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "tmp");
+  _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "root");
+  _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "var");
+  _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "sys");
+  _M0MP36mizchi5wacon3vfs3Vfs5mkdir(self, 0, "lib");
+  const cmds = ["sh", "ls", "cat", "echo", "uname", "env", "grep", "sed", "awk", "cp", "mv", "rm", "mkdir", "rmdir", "pwd", "id", "whoami", "hostname", "date", "wc", "head", "tail", "sort", "uniq", "tr", "true", "false", "yes", "seq", "expr", "test", "printf", "basename", "dirname"];
+  const _bind = cmds.length;
+  let _tmp = 0;
+  while (true) {
+    const _ = _tmp;
+    if (_ < _bind) {
+      const cmd = cmds[_];
+      _M0MP36mizchi5wacon3vfs3Vfs9mksymlink(self, bin, cmd, "/bin/busybox");
+      _tmp = _ + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  _M0MP36mizchi5wacon3vfs3Vfs9mksymlink(self, usr_bin, "env", "/bin/busybox");
+  _M0MP36mizchi5wacon3vfs3Vfs6mkfile(self, dev, "null", _M0MPC15bytes5Bytes3new(0));
+  _M0MP36mizchi5wacon3vfs3Vfs6mkfile(self, dev, "zero", _M0MPC15bytes5Bytes3new(0));
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, dev, "tty", "");
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, etc, "passwd", "root:x:0:0:root:/root:/bin/sh\n");
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, etc, "group", "root:x:0:\n");
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, etc, "hostname", "wacon\n");
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, etc, "os-release", "NAME=\"Alpine Linux\"\nID=alpine\nVERSION_ID=3.21\nPRETTY_NAME=\"Alpine Linux v3.21 (wacon)\"\n");
+  _M0MP36mizchi5wacon3vfs3Vfs9mksymlink(self, proc_self, "exe", "/bin/busybox");
+  _M0MP36mizchi5wacon3vfs3Vfs11mkfile__str(self, proc_self, "cmdline", "busybox\u0000");
+}
 function _M0MP36mizchi5wacon4rv643Fpu3new() {
   return new _M0TP36mizchi5wacon4rv643Fpu($make_array_len_and_init(32, $0L), 0, 0);
 }
 function _M0MP36mizchi5wacon4rv643Cpu3new(mem_size) {
-  return new _M0TP36mizchi5wacon4rv643Cpu($make_array_len_and_init(32, $0L), $0L, $makebytes(mem_size, 0), _M0MP36mizchi5wacon4rv643Fpu3new(), "", false, 0, false, [], $_1L, 0);
+  return new _M0TP36mizchi5wacon4rv643Cpu($make_array_len_and_init(32, $0L), $0L, $makebytes(mem_size, 0), _M0MP36mizchi5wacon4rv643Fpu3new(), _M0MP36mizchi5wacon3vfs3Vfs3new(), "", false, 0, false, [], $_1L, 0);
 }
 function _M0MP36mizchi5wacon4rv643Cpu11write__cstr(self, addr, s) {
   const bytes = _M0FPC28encoding4utf814encode_2einner(new _M0TPC16string10StringView(s, 0, s.length), false);
@@ -2601,6 +3814,31 @@ function _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, addr) {
   const hi = _M0IPC15int645Int64PB6BitAnd4land(_M0MP36mizchi5wacon4rv643Cpu9load__u32(self, _M0IPC15int645Int64PB3Add3add(addr, $4L)), $4294967295L);
   return _M0IPC15int645Int64PB5BitOr3lor(lo, _M0IPC15int645Int64PB3Shl3shl(hi, 32));
 }
+function _M0MP36mizchi5wacon4rv643Cpu13read__cstring(self, addr) {
+  const bytes = [];
+  let i = 0;
+  while (true) {
+    const base = _M0MPC15int645Int647to__int(addr) + i | 0;
+    if (base >= self.memory.length) {
+      break;
+    }
+    const _tmp = self.memory;
+    $bound_check(_tmp, base);
+    const b = _tmp[base];
+    const _p = 0;
+    if (b === _p) {
+      break;
+    }
+    _M0MPC15array5Array4pushGyE(bytes, b);
+    i = i + 1 | 0;
+    if (i > 4096) {
+      break;
+    }
+    continue;
+  }
+  const _bind = _M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(bytes, 0, bytes.length));
+  return _M0FPC28encoding4utf821decode__lossy_2einner(_M0MPC15bytes5Bytes12view_2einner(_bind, 0, _bind.length), false);
+}
 function _M0MP36mizchi5wacon4rv643Cpu12read__string(self, addr, len) {
   const bytes = [];
   const base = _M0MPC15int645Int647to__int(addr);
@@ -2623,6 +3861,16 @@ function _M0MP36mizchi5wacon4rv643Cpu12read__string(self, addr, len) {
   const _bind = _M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(bytes, 0, bytes.length));
   return _M0FPC28encoding4utf821decode__lossy_2einner(_M0MPC15bytes5Bytes12view_2einner(_bind, 0, _bind.length), false);
 }
+function _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, addr, val) {
+  const a = _M0MPC15int645Int647to__int(addr);
+  const _tmp = self.memory;
+  $bound_check(_tmp, a);
+  _tmp[a] = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(val, $255L)) & 255;
+  const _tmp$2 = self.memory;
+  const _tmp$3 = a + 1 | 0;
+  $bound_check(_tmp$2, _tmp$3);
+  _tmp$2[_tmp$3] = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(val, 8), $255L)) & 255;
+}
 function _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, addr, val) {
   const a = _M0MPC15int645Int647to__int(addr);
   const _tmp = self.memory;
@@ -2644,6 +3892,86 @@ function _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, addr, val) {
 function _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, addr, val) {
   _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, addr, val);
   _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, _M0IPC15int645Int64PB3Add3add(addr, $4L), _M0IPC16uint646UInt64PB3Shr3shr(val, 32));
+}
+function _M0MP36mizchi5wacon4rv643Cpu15sys__getdents64(self, fd, buf, buf_size) {
+  const entries = _M0MP36mizchi5wacon3vfs3Vfs7readdir(self.vfs, fd);
+  if (entries.length === 0) {
+    return 0;
+  }
+  let offset = 0;
+  const _bind = entries.length;
+  let _tmp = 0;
+  while (true) {
+    const i = _tmp;
+    if (i < _bind) {
+      const entry = entries[i];
+      const _name = entry._0;
+      const _itype = entry._1;
+      const name_bytes = _M0FPC28encoding4utf814encode_2einner(new _M0TPC16string10StringView(_name, 0, _name.length), false);
+      const reclen = (19 + name_bytes.length | 0) + 1 | 0;
+      const reclen$2 = reclen + 7 & -8;
+      if ((offset + reclen$2 | 0) > buf_size) {
+        break;
+      }
+      const base = _M0IPC15int645Int64PB3Add3add(buf, _M0MPC13int3Int9to__int64(offset));
+      _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, base, _M0MPC13int3Int9to__int64(i + 1 | 0));
+      _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, _M0IPC15int645Int64PB3Add3add(base, $8L), _M0MPC13int3Int9to__int64(i + 1 | 0));
+      _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, _M0IPC15int645Int64PB3Add3add(base, $16L), _M0MPC13int3Int9to__int64(reclen$2));
+      let d_type;
+      switch (_itype) {
+        case 0: {
+          d_type = 8;
+          break;
+        }
+        case 1: {
+          d_type = 4;
+          break;
+        }
+        default: {
+          d_type = 10;
+        }
+      }
+      _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _M0IPC15int645Int64PB3Add3add(base, $18L), _M0MPC13int3Int9to__int64(d_type));
+      const _bind$2 = name_bytes.length;
+      let _tmp$2 = 0;
+      while (true) {
+        const j = _tmp$2;
+        if (j < _bind$2) {
+          const _tmp$3 = _M0IPC15int645Int64PB3Add3add(_M0IPC15int645Int64PB3Add3add(base, $19L), _M0MPC13int3Int9to__int64(j));
+          $bound_check(name_bytes, j);
+          _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _tmp$3, _M0MPC13int3Int9to__int64(name_bytes[j]));
+          _tmp$2 = j + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _M0IPC15int645Int64PB3Add3add(_M0IPC15int645Int64PB3Add3add(base, $19L), _M0MPC13int3Int9to__int64(name_bytes.length)), $0L);
+      offset = offset + reclen$2 | 0;
+      _tmp = i + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  return offset;
+}
+function _M0MP36mizchi5wacon4rv643Cpu11write__stat(self, addr, mode, size) {
+  let _tmp = 0;
+  while (true) {
+    const i = _tmp;
+    if (i < 128) {
+      _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _M0IPC15int645Int64PB3Add3add(addr, _M0MPC13int3Int9to__int64(i)), $0L);
+      _tmp = i + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, _M0IPC15int645Int64PB3Add3add(addr, $8L), $1L);
+  _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, _M0IPC15int645Int64PB3Add3add(addr, $16L), _M0MPC13int3Int9to__int64(mode));
+  _M0MP36mizchi5wacon4rv643Cpu10store__u32(self, _M0IPC15int645Int64PB3Add3add(addr, $20L), $1L);
+  _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, _M0IPC15int645Int64PB3Add3add(addr, $48L), _M0MPC13int3Int9to__int64(size));
 }
 function _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self) {
   const _tmp = self.regs;
@@ -2674,328 +4002,453 @@ function _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self) {
   _L: {
     _L$2: {
       _L$3: {
-        _L$4: {
-          if (num.hi === 0) {
-            switch (num.lo) {
-              case 0: {
-                break _L$3;
-              }
-              case 1: {
-                break _L$3;
-              }
-              case 2: {
-                break _L$3;
-              }
-              case 3: {
-                break _L$3;
-              }
-              case 4: {
-                break _L$3;
-              }
-              case 103: {
-                break _L$2;
-              }
-              case 107: {
-                break _L$2;
-              }
-              case 110: {
-                break _L$2;
-              }
-              case 25: {
-                const _tmp$5 = self.regs;
-                $bound_check(_tmp$5, 10);
-                _tmp$5[10] = $0L;
+        if (num.hi === 0) {
+          switch (num.lo) {
+            case 0: {
+              break _L$2;
+            }
+            case 1: {
+              break _L$2;
+            }
+            case 2: {
+              break _L$2;
+            }
+            case 3: {
+              break _L$2;
+            }
+            case 4: {
+              break _L$2;
+            }
+            case 103: {
+              break _L;
+            }
+            case 107: {
+              break _L;
+            }
+            case 110: {
+              break _L;
+            }
+            case 25: {
+              const _tmp$5 = self.regs;
+              $bound_check(_tmp$5, 10);
+              _tmp$5[10] = $0L;
+              return;
+            }
+            case 29: {
+              if (_M0IPC15int645Int64PB2Eq5equal(a1, $21523L)) {
+                _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, a2, $24L);
+                _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, _M0IPC15int645Int64PB3Add3add(a2, $2L), $80L);
+                _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, _M0IPC15int645Int64PB3Add3add(a2, $4L), $0L);
+                _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, _M0IPC15int645Int64PB3Add3add(a2, $6L), $0L);
+                const _tmp$6 = self.regs;
+                $bound_check(_tmp$6, 10);
+                _tmp$6[10] = $0L;
                 return;
-              }
-              case 29: {
+              } else {
                 const _tmp$6 = self.regs;
                 $bound_check(_tmp$6, 10);
                 _tmp$6[10] = $_25L;
                 return;
               }
-              case 35: {
-                const _tmp$7 = self.regs;
-                $bound_check(_tmp$7, 10);
-                _tmp$7[10] = $0L;
-                return;
-              }
-              case 48: {
-                const _tmp$8 = self.regs;
-                $bound_check(_tmp$8, 10);
-                _tmp$8[10] = $_2L;
-                return;
-              }
-              case 56: {
+            }
+            case 35: {
+              const _tmp$6 = self.regs;
+              $bound_check(_tmp$6, 10);
+              _tmp$6[10] = $0L;
+              return;
+            }
+            case 48: {
+              const path = _M0MP36mizchi5wacon4rv643Cpu13read__cstring(self, a1);
+              const _bind = _M0MP36mizchi5wacon3vfs3Vfs4stat(self.vfs, path);
+              const _err = _bind._0;
+              const _tmp$7 = self.regs;
+              $bound_check(_tmp$7, 10);
+              _tmp$7[10] = _M0MPC13int3Int9to__int64(_err);
+              return;
+            }
+            case 56: {
+              const dirfd = _M0MPC15int645Int647to__int(a0);
+              const path$2 = _M0MP36mizchi5wacon4rv643Cpu13read__cstring(self, a1);
+              const flags = _M0MPC15int645Int647to__int(a2);
+              const fd = _M0MP36mizchi5wacon3vfs3Vfs4open(self.vfs, dirfd, path$2, flags);
+              const _tmp$8 = self.regs;
+              $bound_check(_tmp$8, 10);
+              _tmp$8[10] = _M0MPC13int3Int9to__int64(fd);
+              return;
+            }
+            case 57: {
+              const fd$2 = _M0MPC15int645Int647to__int(a0);
+              if (fd$2 > 2) {
                 const _tmp$9 = self.regs;
                 $bound_check(_tmp$9, 10);
-                _tmp$9[10] = $_2L;
+                _tmp$9[10] = _M0MPC13int3Int9to__int64(_M0MP36mizchi5wacon3vfs3Vfs5close(self.vfs, fd$2));
+                return;
+              } else {
+                const _tmp$9 = self.regs;
+                $bound_check(_tmp$9, 10);
+                _tmp$9[10] = $0L;
                 return;
               }
-              case 57: {
-                const _tmp$10 = self.regs;
-                $bound_check(_tmp$10, 10);
-                _tmp$10[10] = $0L;
-                return;
-              }
-              case 62: {
+            }
+            case 61: {
+              const fd$3 = _M0MPC15int645Int647to__int(a0);
+              const buf_size = _M0MPC15int645Int647to__int(a2);
+              const _tmp$9 = self.regs;
+              $bound_check(_tmp$9, 10);
+              _tmp$9[10] = _M0MPC13int3Int9to__int64(_M0MP36mizchi5wacon4rv643Cpu15sys__getdents64(self, fd$3, a1, buf_size));
+              return;
+            }
+            case 62: {
+              const fd$4 = _M0MPC15int645Int647to__int(a0);
+              const offset = _M0MPC15int645Int647to__int(a1);
+              const whence = _M0MPC15int645Int647to__int(a2);
+              const _tmp$10 = self.regs;
+              $bound_check(_tmp$10, 10);
+              _tmp$10[10] = _M0MPC13int3Int9to__int64(_M0MP36mizchi5wacon3vfs3Vfs5lseek(self.vfs, fd$4, offset, whence));
+              return;
+            }
+            case 63: {
+              const fd$5 = _M0MPC15int645Int647to__int(a0);
+              if (fd$5 === 0) {
                 const _tmp$11 = self.regs;
                 $bound_check(_tmp$11, 10);
                 _tmp$11[10] = $0L;
                 return;
-              }
-              case 63: {
-                const _tmp$12 = self.regs;
-                $bound_check(_tmp$12, 10);
-                _tmp$12[10] = $0L;
-                return;
-              }
-              case 64: {
+              } else {
                 const count = _M0MPC15int645Int647to__int(a2);
-                if (_M0IPC15int645Int64PB2Eq5equal(a0, $1L) || _M0IPC15int645Int64PB2Eq5equal(a0, $2L)) {
-                  const text = _M0MP36mizchi5wacon4rv643Cpu12read__string(self, a1, count);
-                  self.stdout = `${self.stdout}${text}`;
-                }
-                const _tmp$13 = self.regs;
-                $bound_check(_tmp$13, 10);
-                _tmp$13[10] = a2;
-                return;
-              }
-              case 66: {
-                const iovcnt = _M0MPC15int645Int647to__int(a2);
-                let total = $0L;
-                let _tmp$14 = 0;
-                while (true) {
-                  const i = _tmp$14;
-                  if (i < iovcnt) {
-                    const iov_addr = _M0IPC15int645Int64PB3Add3add(a1, _M0MPC13int3Int9to__int64(Math.imul(i, 16) | 0));
-                    const buf = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, iov_addr);
-                    const len = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, _M0IPC15int645Int64PB3Add3add(iov_addr, $8L));
-                    if (_M0IPC15int645Int64PB2Eq5equal(a0, $1L) || _M0IPC15int645Int64PB2Eq5equal(a0, $2L)) {
-                      const text = _M0MP36mizchi5wacon4rv643Cpu12read__string(self, buf, _M0MPC15int645Int647to__int(len));
-                      self.stdout = `${self.stdout}${text}`;
+                const _bind$2 = _M0MP36mizchi5wacon3vfs3Vfs4read(self.vfs, fd$5, count);
+                const _data = _bind$2._0;
+                const _n = _bind$2._1;
+                if (_n > 0) {
+                  let _tmp$11 = 0;
+                  while (true) {
+                    const i = _tmp$11;
+                    if (i < _n) {
+                      const _tmp$12 = _M0IPC15int645Int64PB3Add3add(a1, _M0MPC13int3Int9to__int64(i));
+                      $bound_check(_data, i);
+                      _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _tmp$12, _M0MPC13int3Int9to__int64(_data[i]));
+                      _tmp$11 = i + 1 | 0;
+                      continue;
+                    } else {
+                      break;
                     }
-                    total = _M0IPC15int645Int64PB3Add3add(total, len);
-                    _tmp$14 = i + 1 | 0;
-                    continue;
-                  } else {
-                    break;
                   }
                 }
-                const _tmp$15 = self.regs;
-                $bound_check(_tmp$15, 10);
-                _tmp$15[10] = total;
+                const _tmp$11 = self.regs;
+                $bound_check(_tmp$11, 10);
+                _tmp$11[10] = _M0MPC13int3Int9to__int64(_n);
                 return;
-              }
-              case 73: {
-                const _tmp$16 = self.regs;
-                $bound_check(_tmp$16, 10);
-                _tmp$16[10] = $0L;
-                return;
-              }
-              case 78: {
-                const _tmp$17 = self.regs;
-                $bound_check(_tmp$17, 10);
-                _tmp$17[10] = $_2L;
-                return;
-              }
-              case 79: {
-                break _L;
-              }
-              case 80: {
-                break _L;
-              }
-              case 93: {
-                self.exit_code = _M0MPC15int645Int647to__int(a0);
-                self.halted = true;
-                return;
-              }
-              case 94: {
-                self.exit_code = _M0MPC15int645Int647to__int(a0);
-                self.halted = true;
-                return;
-              }
-              case 96: {
-                const _tmp$18 = self.regs;
-                $bound_check(_tmp$18, 10);
-                _tmp$18[10] = $1L;
-                return;
-              }
-              case 99: {
-                const _tmp$19 = self.regs;
-                $bound_check(_tmp$19, 10);
-                _tmp$19[10] = $0L;
-                return;
-              }
-              case 113: {
-                _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, a1, $0L);
-                _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, _M0IPC15int645Int64PB3Add3add(a1, $8L), $0L);
-                const _tmp$20 = self.regs;
-                $bound_check(_tmp$20, 10);
-                _tmp$20[10] = $0L;
-                return;
-              }
-              case 124: {
-                const _tmp$21 = self.regs;
-                $bound_check(_tmp$21, 10);
-                _tmp$21[10] = $0L;
-                return;
-              }
-              case 131: {
-                const _tmp$22 = self.regs;
-                $bound_check(_tmp$22, 10);
-                _tmp$22[10] = $0L;
-                return;
-              }
-              case 132: {
-                const _tmp$23 = self.regs;
-                $bound_check(_tmp$23, 10);
-                _tmp$23[10] = $0L;
-                return;
-              }
-              case 134: {
-                const _tmp$24 = self.regs;
-                $bound_check(_tmp$24, 10);
-                _tmp$24[10] = $0L;
-                return;
-              }
-              case 135: {
-                const _tmp$25 = self.regs;
-                $bound_check(_tmp$25, 10);
-                _tmp$25[10] = $0L;
-                return;
-              }
-              case 160: {
-                _M0FP36mizchi5wacon4rv6414write__utsname(self, a0);
-                const _tmp$26 = self.regs;
-                $bound_check(_tmp$26, 10);
-                _tmp$26[10] = $0L;
-                return;
-              }
-              case 172: {
-                const _tmp$27 = self.regs;
-                $bound_check(_tmp$27, 10);
-                _tmp$27[10] = $1L;
-                return;
-              }
-              case 173: {
-                const _tmp$28 = self.regs;
-                $bound_check(_tmp$28, 10);
-                _tmp$28[10] = $0L;
-                return;
-              }
-              case 174: {
-                const _tmp$29 = self.regs;
-                $bound_check(_tmp$29, 10);
-                _tmp$29[10] = $0L;
-                return;
-              }
-              case 175: {
-                const _tmp$30 = self.regs;
-                $bound_check(_tmp$30, 10);
-                _tmp$30[10] = $0L;
-                return;
-              }
-              case 176: {
-                const _tmp$31 = self.regs;
-                $bound_check(_tmp$31, 10);
-                _tmp$31[10] = $0L;
-                return;
-              }
-              case 177: {
-                const _tmp$32 = self.regs;
-                $bound_check(_tmp$32, 10);
-                _tmp$32[10] = $0L;
-                return;
-              }
-              case 178: {
-                const _tmp$33 = self.regs;
-                $bound_check(_tmp$33, 10);
-                _tmp$33[10] = $1L;
-                return;
-              }
-              case 179: {
-                const _tmp$34 = self.regs;
-                $bound_check(_tmp$34, 10);
-                _tmp$34[10] = $0L;
-                return;
-              }
-              case 214: {
-                const _tmp$35 = self.regs;
-                $bound_check(_tmp$35, 10);
-                _tmp$35[10] = a0;
-                return;
-              }
-              case 215: {
-                const _tmp$36 = self.regs;
-                $bound_check(_tmp$36, 10);
-                _tmp$36[10] = $0L;
-                return;
-              }
-              case 222: {
-                const result = _M0IPC15int645Int64PB3Sub3sub(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Sub3sub(_M0MPC13int3Int9to__int64(self.memory.length), $1048576L), $_4096L), a1);
-                const _tmp$37 = self.regs;
-                $bound_check(_tmp$37, 10);
-                _tmp$37[10] = result;
-                return;
-              }
-              case 226: {
-                const _tmp$38 = self.regs;
-                $bound_check(_tmp$38, 10);
-                _tmp$38[10] = $0L;
-                return;
-              }
-              case 261: {
-                const _tmp$39 = self.regs;
-                $bound_check(_tmp$39, 10);
-                _tmp$39[10] = $0L;
-                return;
-              }
-              case 278: {
-                const count$2 = _M0MPC15int645Int647to__int(a1);
-                let _tmp$40 = 0;
-                while (true) {
-                  const i = _tmp$40;
-                  if (i < count$2) {
-                    _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _M0IPC15int645Int64PB3Add3add(a0, _M0MPC13int3Int9to__int64(i)), $0L);
-                    _tmp$40 = i + 1 | 0;
-                    continue;
-                  } else {
-                    break;
-                  }
-                }
-                const _tmp$41 = self.regs;
-                $bound_check(_tmp$41, 10);
-                _tmp$41[10] = a1;
-                return;
-              }
-              case 259: {
-                const _tmp$42 = self.regs;
-                $bound_check(_tmp$42, 10);
-                _tmp$42[10] = $0L;
-                return;
-              }
-              case 283: {
-                const _tmp$43 = self.regs;
-                $bound_check(_tmp$43, 10);
-                _tmp$43[10] = $0L;
-                return;
-              }
-              default: {
-                break _L$4;
               }
             }
-          } else {
-            break _L$4;
+            case 64: {
+              const count = _M0MPC15int645Int647to__int(a2);
+              if (_M0IPC15int645Int64PB2Eq5equal(a0, $1L) || _M0IPC15int645Int64PB2Eq5equal(a0, $2L)) {
+                const text = _M0MP36mizchi5wacon4rv643Cpu12read__string(self, a1, count);
+                self.stdout = `${self.stdout}${text}`;
+              }
+              const _tmp$11 = self.regs;
+              $bound_check(_tmp$11, 10);
+              _tmp$11[10] = a2;
+              return;
+            }
+            case 66: {
+              const iovcnt = _M0MPC15int645Int647to__int(a2);
+              let total = $0L;
+              let _tmp$12 = 0;
+              while (true) {
+                const i = _tmp$12;
+                if (i < iovcnt) {
+                  const iov_addr = _M0IPC15int645Int64PB3Add3add(a1, _M0MPC13int3Int9to__int64(Math.imul(i, 16) | 0));
+                  const buf = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, iov_addr);
+                  const len = _M0MP36mizchi5wacon4rv643Cpu9load__u64(self, _M0IPC15int645Int64PB3Add3add(iov_addr, $8L));
+                  if (_M0IPC15int645Int64PB2Eq5equal(a0, $1L) || _M0IPC15int645Int64PB2Eq5equal(a0, $2L)) {
+                    const text = _M0MP36mizchi5wacon4rv643Cpu12read__string(self, buf, _M0MPC15int645Int647to__int(len));
+                    self.stdout = `${self.stdout}${text}`;
+                  }
+                  total = _M0IPC15int645Int64PB3Add3add(total, len);
+                  _tmp$12 = i + 1 | 0;
+                  continue;
+                } else {
+                  break;
+                }
+              }
+              const _tmp$13 = self.regs;
+              $bound_check(_tmp$13, 10);
+              _tmp$13[10] = total;
+              return;
+            }
+            case 73: {
+              const _tmp$14 = self.regs;
+              $bound_check(_tmp$14, 10);
+              _tmp$14[10] = $0L;
+              return;
+            }
+            case 78: {
+              const path$3 = _M0MP36mizchi5wacon4rv643Cpu13read__cstring(self, a1);
+              const _bind$2 = _M0MP36mizchi5wacon3vfs3Vfs8readlink(self.vfs, path$3);
+              if (_bind$2 === undefined) {
+                const _tmp$15 = self.regs;
+                $bound_check(_tmp$15, 10);
+                _tmp$15[10] = $_2L;
+                return;
+              } else {
+                const _Some = _bind$2;
+                const _target = _Some;
+                const bytes = _M0FPC28encoding4utf814encode_2einner(new _M0TPC16string10StringView(_target, 0, _target.length), false);
+                const len = bytes.length < _M0MPC15int645Int647to__int(a2) ? bytes.length : _M0MPC15int645Int647to__int(a2);
+                let _tmp$15 = 0;
+                while (true) {
+                  const i = _tmp$15;
+                  if (i < len) {
+                    const _tmp$16 = self.regs;
+                    $bound_check(_tmp$16, 10);
+                    const _tmp$17 = _M0IPC15int645Int64PB3Add3add(_tmp$16[10], _M0MPC13int3Int9to__int64(i));
+                    $bound_check(bytes, i);
+                    _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _tmp$17, _M0MPC13int3Int9to__int64(bytes[i]));
+                    _tmp$15 = i + 1 | 0;
+                    continue;
+                  } else {
+                    break;
+                  }
+                }
+                const _tmp$16 = self.regs;
+                $bound_check(_tmp$16, 13);
+                const bufsiz = _M0MPC15int645Int647to__int(_tmp$16[13]);
+                const write_len = bytes.length < bufsiz ? bytes.length : bufsiz;
+                let _tmp$17 = 0;
+                while (true) {
+                  const i = _tmp$17;
+                  if (i < write_len) {
+                    const _tmp$18 = _M0IPC15int645Int64PB3Add3add(a2, _M0MPC13int3Int9to__int64(i));
+                    $bound_check(bytes, i);
+                    _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _tmp$18, _M0MPC13int3Int9to__int64(bytes[i]));
+                    _tmp$17 = i + 1 | 0;
+                    continue;
+                  } else {
+                    break;
+                  }
+                }
+                const _tmp$18 = self.regs;
+                $bound_check(_tmp$18, 10);
+                _tmp$18[10] = _M0MPC13int3Int9to__int64(write_len);
+                return;
+              }
+            }
+            case 79: {
+              const path$4 = _M0MP36mizchi5wacon4rv643Cpu13read__cstring(self, a1);
+              const _bind$3 = _M0MP36mizchi5wacon3vfs3Vfs4stat(self.vfs, path$4);
+              const _err$2 = _bind$3._0;
+              const _mode = _bind$3._1;
+              const _size = _bind$3._2;
+              if (_err$2 === 0) {
+                _M0MP36mizchi5wacon4rv643Cpu11write__stat(self, a2, _mode, _size);
+              }
+              const _tmp$15 = self.regs;
+              $bound_check(_tmp$15, 10);
+              _tmp$15[10] = _M0MPC13int3Int9to__int64(_err$2);
+              return;
+            }
+            case 80: {
+              const fd$6 = _M0MPC15int645Int647to__int(a0);
+              const _bind$4 = _M0MP36mizchi5wacon3vfs3Vfs5fstat(self.vfs, fd$6);
+              const _err$3 = _bind$4._0;
+              const _mode$2 = _bind$4._1;
+              const _size$2 = _bind$4._2;
+              if (_err$3 === 0) {
+                _M0MP36mizchi5wacon4rv643Cpu11write__stat(self, a1, _mode$2, _size$2);
+              }
+              const _tmp$16 = self.regs;
+              $bound_check(_tmp$16, 10);
+              _tmp$16[10] = _M0MPC13int3Int9to__int64(_err$3);
+              return;
+            }
+            case 93: {
+              self.exit_code = _M0MPC15int645Int647to__int(a0);
+              self.halted = true;
+              return;
+            }
+            case 94: {
+              self.exit_code = _M0MPC15int645Int647to__int(a0);
+              self.halted = true;
+              return;
+            }
+            case 96: {
+              const _tmp$17 = self.regs;
+              $bound_check(_tmp$17, 10);
+              _tmp$17[10] = $1L;
+              return;
+            }
+            case 99: {
+              const _tmp$18 = self.regs;
+              $bound_check(_tmp$18, 10);
+              _tmp$18[10] = $0L;
+              return;
+            }
+            case 113: {
+              _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, a1, $0L);
+              _M0MP36mizchi5wacon4rv643Cpu10store__u64(self, _M0IPC15int645Int64PB3Add3add(a1, $8L), $0L);
+              const _tmp$19 = self.regs;
+              $bound_check(_tmp$19, 10);
+              _tmp$19[10] = $0L;
+              return;
+            }
+            case 124: {
+              const _tmp$20 = self.regs;
+              $bound_check(_tmp$20, 10);
+              _tmp$20[10] = $0L;
+              return;
+            }
+            case 131: {
+              const _tmp$21 = self.regs;
+              $bound_check(_tmp$21, 10);
+              _tmp$21[10] = $0L;
+              return;
+            }
+            case 132: {
+              const _tmp$22 = self.regs;
+              $bound_check(_tmp$22, 10);
+              _tmp$22[10] = $0L;
+              return;
+            }
+            case 134: {
+              const _tmp$23 = self.regs;
+              $bound_check(_tmp$23, 10);
+              _tmp$23[10] = $0L;
+              return;
+            }
+            case 135: {
+              const _tmp$24 = self.regs;
+              $bound_check(_tmp$24, 10);
+              _tmp$24[10] = $0L;
+              return;
+            }
+            case 160: {
+              _M0FP36mizchi5wacon4rv6414write__utsname(self, a0);
+              const _tmp$25 = self.regs;
+              $bound_check(_tmp$25, 10);
+              _tmp$25[10] = $0L;
+              return;
+            }
+            case 172: {
+              const _tmp$26 = self.regs;
+              $bound_check(_tmp$26, 10);
+              _tmp$26[10] = $1L;
+              return;
+            }
+            case 173: {
+              const _tmp$27 = self.regs;
+              $bound_check(_tmp$27, 10);
+              _tmp$27[10] = $0L;
+              return;
+            }
+            case 174: {
+              const _tmp$28 = self.regs;
+              $bound_check(_tmp$28, 10);
+              _tmp$28[10] = $0L;
+              return;
+            }
+            case 175: {
+              const _tmp$29 = self.regs;
+              $bound_check(_tmp$29, 10);
+              _tmp$29[10] = $0L;
+              return;
+            }
+            case 176: {
+              const _tmp$30 = self.regs;
+              $bound_check(_tmp$30, 10);
+              _tmp$30[10] = $0L;
+              return;
+            }
+            case 177: {
+              const _tmp$31 = self.regs;
+              $bound_check(_tmp$31, 10);
+              _tmp$31[10] = $0L;
+              return;
+            }
+            case 178: {
+              const _tmp$32 = self.regs;
+              $bound_check(_tmp$32, 10);
+              _tmp$32[10] = $1L;
+              return;
+            }
+            case 179: {
+              const _tmp$33 = self.regs;
+              $bound_check(_tmp$33, 10);
+              _tmp$33[10] = $0L;
+              return;
+            }
+            case 214: {
+              const _tmp$34 = self.regs;
+              $bound_check(_tmp$34, 10);
+              _tmp$34[10] = a0;
+              return;
+            }
+            case 215: {
+              const _tmp$35 = self.regs;
+              $bound_check(_tmp$35, 10);
+              _tmp$35[10] = $0L;
+              return;
+            }
+            case 222: {
+              const result = _M0IPC15int645Int64PB3Sub3sub(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC15int645Int64PB3Sub3sub(_M0MPC13int3Int9to__int64(self.memory.length), $1048576L), $_4096L), a1);
+              const _tmp$36 = self.regs;
+              $bound_check(_tmp$36, 10);
+              _tmp$36[10] = result;
+              return;
+            }
+            case 226: {
+              const _tmp$37 = self.regs;
+              $bound_check(_tmp$37, 10);
+              _tmp$37[10] = $0L;
+              return;
+            }
+            case 261: {
+              const _tmp$38 = self.regs;
+              $bound_check(_tmp$38, 10);
+              _tmp$38[10] = $0L;
+              return;
+            }
+            case 278: {
+              const count$2 = _M0MPC15int645Int647to__int(a1);
+              let _tmp$39 = 0;
+              while (true) {
+                const i = _tmp$39;
+                if (i < count$2) {
+                  _M0MP36mizchi5wacon4rv643Cpu9store__u8(self, _M0IPC15int645Int64PB3Add3add(a0, _M0MPC13int3Int9to__int64(i)), $0L);
+                  _tmp$39 = i + 1 | 0;
+                  continue;
+                } else {
+                  break;
+                }
+              }
+              const _tmp$40 = self.regs;
+              $bound_check(_tmp$40, 10);
+              _tmp$40[10] = a1;
+              return;
+            }
+            case 259: {
+              const _tmp$41 = self.regs;
+              $bound_check(_tmp$41, 10);
+              _tmp$41[10] = $0L;
+              return;
+            }
+            case 283: {
+              const _tmp$42 = self.regs;
+              $bound_check(_tmp$42, 10);
+              _tmp$42[10] = $0L;
+              return;
+            }
+            default: {
+              break _L$3;
+            }
           }
+        } else {
+          break _L$3;
         }
-        const _tmp$5 = self.regs;
-        $bound_check(_tmp$5, 10);
-        _tmp$5[10] = $_38L;
-        return;
       }
       const _tmp$5 = self.regs;
       $bound_check(_tmp$5, 10);
-      _tmp$5[10] = $0L;
+      _tmp$5[10] = $_38L;
       return;
     }
     const _tmp$5 = self.regs;
@@ -3005,7 +4458,7 @@ function _M0MP36mizchi5wacon4rv643Cpu13handle__ecall(self) {
   }
   const _tmp$5 = self.regs;
   $bound_check(_tmp$5, 10);
-  _tmp$5[10] = $_2L;
+  _tmp$5[10] = $0L;
 }
 function _M0FP36mizchi5wacon4rv6414is__compressed(inst) {
   return _M0IP016_24default__implPB2Eq10not__equalGlE(_M0IPC15int645Int64PB6BitAnd4land(inst, $3L), $3L);
@@ -3268,7 +4721,7 @@ function _M0FP36mizchi5wacon4rv6410expand__q2(inst, funct3) {
       const b12 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 12), $1L);
       const rd$4 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 7), $31L);
       const rs2 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 2), $31L);
-      return _M0IPC15int645Int64PB2Eq5equal(b12, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($0L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl($0L, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20))) : _M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rd$4, $0L) ? _M0FP36mizchi5wacon4rv6425expand__q2_2econstr_2f869 : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($1L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15))) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20));
+      return _M0IPC15int645Int64PB2Eq5equal(b12, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($0L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl($0L, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20))) : _M0IPC15int645Int64PB2Eq5equal(rs2, $0L) ? (_M0IPC15int645Int64PB2Eq5equal(rd$4, $0L) ? _M0FP36mizchi5wacon4rv6426expand__q2_2econstr_2f1377 : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($103L, _M0IPC15int645Int64PB3Shl3shl($1L, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15))) : _M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor(_M0IPC15int645Int64PB5BitOr3lor($51L, _M0IPC15int645Int64PB3Shl3shl(rd$4, 7)), _M0IPC15int645Int64PB3Shl3shl($0L, 12)), _M0IPC15int645Int64PB3Shl3shl(rd$4, 15)), _M0IPC15int645Int64PB3Shl3shl(rs2, 20));
     }
     case 6: {
       const rs2$2 = _M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(inst, 2), $31L);
@@ -3330,16 +4783,6 @@ function _M0MP36mizchi5wacon4rv643Cpu9load__u16(self, addr) {
   const _tmp$4 = a + 1 | 0;
   $bound_check(_tmp$3, _tmp$4);
   return _M0IPC15int645Int64PB5BitOr3lor(_tmp$2, _M0IPC15int645Int64PB3Shl3shl(_M0IPC15int645Int64PB6BitAnd4land(_M0MPC13int3Int9to__int64(_tmp$3[_tmp$4]), $255L), 8));
-}
-function _M0MP36mizchi5wacon4rv643Cpu10store__u16(self, addr, val) {
-  const a = _M0MPC15int645Int647to__int(addr);
-  const _tmp = self.memory;
-  $bound_check(_tmp, a);
-  _tmp[a] = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(val, $255L)) & 255;
-  const _tmp$2 = self.memory;
-  const _tmp$3 = a + 1 | 0;
-  $bound_check(_tmp$2, _tmp$3);
-  _tmp$2[_tmp$3] = _M0MPC15int645Int647to__int(_M0IPC15int645Int64PB6BitAnd4land(_M0IPC16uint646UInt64PB3Shr3shr(val, 8), $255L)) & 255;
 }
 function _M0FP36mizchi5wacon4rv6415f64__from__bits(bits) {
   return _M0MPC15int645Int6423reinterpret__as__double(bits);
@@ -4759,6 +6202,9 @@ function _M0MP36mizchi5wacon4rv643Cpu4step(self) {
       break;
     }
     default: {
+      if (self.trace_syscalls) {
+        self.stdout = `${self.stdout}[unknown opcode: 0x${_M0MPC13int3Int18to__string_2einner(op, 10)} inst=0x${_M0MPC15int645Int6418to__string_2einner(_inst, 10)} pc=0x${_M0MPC15int645Int6418to__string_2einner(self.pc, 10)}]\n`;
+      }
       self.halted = true;
       return false;
     }
@@ -5043,6 +6489,7 @@ function _M0FP46mizchi5wacon3cmd4wasm11parse__args(s) {
   const argv_str = _M0FP46mizchi5wacon3cmd4wasm13js__get__argv();
   const args = _M0FP46mizchi5wacon3cmd4wasm11parse__args(argv_str);
   const cpu = _M0MP36mizchi5wacon4rv643Cpu3new(16777216);
+  _M0MP36mizchi5wacon3vfs3Vfs12init__alpine(cpu.vfs);
   if (!_M0MP36mizchi5wacon4rv643Cpu9load__elf(cpu, elf_data)) {
     _M0FP46mizchi5wacon3cmd4wasm17js__write__stdout("Failed to load ELF\r\n");
     return;

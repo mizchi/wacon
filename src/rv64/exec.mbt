@@ -376,6 +376,16 @@ pub fn Cpu::step(self : Cpu) -> Bool {
     // FENCE
     0x0F => self.pc += inst_size
     _ => {
+      if self.trace_syscalls {
+        self.stdout = self.stdout +
+          "[unknown opcode: 0x" +
+          op.to_string() +
+          " inst=0x" +
+          inst.to_string() +
+          " pc=0x" +
+          self.pc.to_string() +
+          "]\n"
+      }
       self.halted = true
       return false
     }

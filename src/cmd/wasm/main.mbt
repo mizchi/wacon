@@ -20,6 +20,7 @@ fn main {
   let argv_str = js_get_argv()
   let args = parse_args(argv_str)
   let cpu = @rv64.Cpu::new(16 * 1024 * 1024) // 16MB
+  cpu.vfs.init_alpine()
   if not(cpu.load_elf(elf_data)) {
     js_write_stdout("Failed to load ELF\r\n")
     return

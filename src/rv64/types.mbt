@@ -9,6 +9,8 @@ pub(all) struct Cpu {
   memory : FixedArray[Byte]
   /// Floating-point unit
   fpu : Fpu
+  /// Virtual filesystem
+  vfs : @vfs.Vfs
   /// Captured stdout
   mut stdout : String
   /// Halted flag
@@ -30,6 +32,7 @@ pub fn Cpu::new(mem_size : Int) -> Cpu {
     pc: 0L,
     memory: FixedArray::make(mem_size, b'\x00'),
     fpu: Fpu::new(),
+    vfs: @vfs.Vfs::new(),
     stdout: "",
     halted: false,
     exit_code: 0,

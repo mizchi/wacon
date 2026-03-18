@@ -40,6 +40,19 @@ test "rv64 ld/sd" {
 }
 
 ///|
+test "rv64 load and run hello64 with C extension" {
+  let data = @store.read_file(
+    "/Users/mz/ghq/github.com/mizchi/wacon/fixtures/hello-rv64c.elf",
+  )
+  assert_true(data.length() > 0)
+  let cpu = @rv64.Cpu::new(1024 * 1024)
+  assert_true(cpu.load_elf(data))
+  let _ = cpu.run_limit(10000)
+  inspect(cpu.stdout, content="hello from rv64!\n")
+  inspect(cpu.exit_code, content="0")
+}
+
+///|
 test "rv64 mul/div (M extension)" {
   let cpu = @rv64.Cpu::new(4096)
   // addi x1, x0, 7

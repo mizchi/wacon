@@ -125,26 +125,39 @@ pub fn Cpu::step(self : Cpu) -> Bool {
   if self.halted {
     return false
   }
-  let inst = self.load_u32(self.pc)
-  if inst == 0L {
+  let raw = self.load_u32(self.pc)
+  if raw == 0L {
     self.halted = true
     return false
+  }
+  // Check for compressed instruction
+  let (inst_size, inst) : (Int64, Int64) = if is_compressed(raw) {
+    let compressed = raw.land(0xFFFFL)
+    match expand_compressed(compressed) {
+      Some(expanded) => (2L, expanded)
+      None => {
+        self.halted = true
+        return false
+      }
+    }
+  } else {
+    (4L, raw)
   }
   let op = opcode(inst)
   match op {
     // LUI
     0x37 => {
       self.set_reg(rd(inst), imm_u(inst))
-      self.pc += 4L
+      self.pc += inst_size
     }
     // AUIPC
     0x17 => {
       self.set_reg(rd(inst), self.pc + imm_u(inst))
-      self.pc += 4L
+      self.pc += inst_size
     }
     // JAL
     0x6F => {
-      self.set_reg(rd(inst), self.pc + 4L)
+      self.set_reg(rd(inst), self.pc + inst_size)
       self.pc += imm_j(inst)
     }
     // JALR
@@ -152,7 +165,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
       let target = (self.get_reg(rs1(inst)) + imm_i(inst)).land(
         -2L, // clear LSB
       )
-      self.set_reg(rd(inst), self.pc + 4L)
+      self.set_reg(rd(inst), self.pc + inst_size)
       self.pc = target
     }
     // Branch
@@ -170,7 +183,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
           a.reinterpret_as_uint64() >= b.reinterpret_as_uint64()
         _ => false
       }
-      self.pc += if taken { imm_b(inst) } else { 4L }
+      self.pc += if taken { imm_b(inst) } else { inst_size }
     }
     // Load
     0x03 => {
@@ -186,7 +199,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         _ => 0L
       }
       self.set_reg(rd(inst), val)
-      self.pc += 4L
+      self.pc += inst_size
     }
     // Store
     0x23 => {
@@ -199,7 +212,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         3 => self.store_u64(addr, val) // SD
         _ => ()
       }
-      self.pc += 4L
+      self.pc += inst_size
     }
     // I-type ALU (64-bit)
     0x13 => {
@@ -231,7 +244,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         _ => 0L
       }
       self.set_reg(rd(inst), result)
-      self.pc += 4L
+      self.pc += inst_size
     }
     // R-type ALU (64-bit)
     0x33 => {
@@ -265,7 +278,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         }
       }
       self.set_reg(rd(inst), result)
-      self.pc += 4L
+      self.pc += inst_size
     }
     // I-type ALU W (32-bit result, sign-extended to 64)
     0x1B => {
@@ -293,7 +306,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         _ => 0L
       }
       self.set_reg(rd(inst), result)
-      self.pc += 4L
+      self.pc += inst_size
     }
     // R-type ALU W (32-bit)
     0x3B => {
@@ -328,15 +341,15 @@ pub fn Cpu::step(self : Cpu) -> Bool {
         }
       }
       self.set_reg(rd(inst), result)
-      self.pc += 4L
+      self.pc += inst_size
     }
     // ECALL / EBREAK
     0x73 => {
       self.handle_ecall()
-      self.pc += 4L
+      self.pc += inst_size
     }
     // FENCE
-    0x0F => self.pc += 4L
+    0x0F => self.pc += inst_size
     _ => {
       self.halted = true
       return false

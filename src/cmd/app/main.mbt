@@ -76,7 +76,7 @@ fn run_layer(
       // Save decompressed data to a temp path and run
       let run_path = local_store.blob_path(digest) + ".wasm"
       let ok = local_store.put_blob(digest + ".wasm", data)
-      if not(ok) {
+      if !(ok) {
         println("Error: failed to write decompressed blob")
       } else {
         println("Running " + run_path)

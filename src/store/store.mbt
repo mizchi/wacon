@@ -68,7 +68,7 @@ pub fn Store::put_blob(self : Store, digest : String, data : Bytes) -> Bool {
 
 ///|
 pub fn Store::get_blob(self : Store, digest : String) -> Bytes? {
-  if not(self.has_blob(digest)) {
+  if !(self.has_blob(digest)) {
     return None
   }
   let path = self.blob_path(digest)

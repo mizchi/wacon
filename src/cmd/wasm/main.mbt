@@ -61,7 +61,7 @@ fn main {
   let args = parse_args(argv_str)
   let cpu = @rv64.Cpu::new(16 * 1024 * 1024) // 16MB
   cpu.vfs.init_alpine()
-  if not(cpu.load_elf(elf_data)) {
+  if !(cpu.load_elf(elf_data)) {
     js_write_stdout("Failed to load ELF\r\n")
     return
   }
@@ -108,7 +108,7 @@ fn main {
   let _ = cpu.run_limit(200_000_000)
   // Output
   js_write_stdout(cpu.stdout)
-  if not(cpu.halted) {
+  if !(cpu.halted) {
     js_write_stdout("[timeout: 200M steps]\r\n")
   }
 }

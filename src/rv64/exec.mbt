@@ -143,13 +143,13 @@ pub fn Cpu::step(self : Cpu) -> Bool {
     (4L, raw)
   }
   self.dispatch(inst.land(0x7FL).to_int(), inst, inst_size)
-  not(self.halted)
+  !(self.halted)
 }
 
 ///|
 pub fn Cpu::run(self : Cpu) -> Unit {
   for ;; {
-    if not(self.step()) {
+    if !(self.step()) {
       break
     }
   }

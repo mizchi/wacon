@@ -254,11 +254,11 @@ pub async fn pull(
     Some(m) => m
     None => return None
   }
-  if not(fetch_blob(image, manifest.config.digest, token, local_store)) {
+  if !(fetch_blob(image, manifest.config.digest, token, local_store)) {
     return None
   }
   for layer in manifest.layers {
-    if not(fetch_blob(image, layer.digest, token, local_store)) {
+    if !(fetch_blob(image, layer.digest, token, local_store)) {
       return None
     }
   }

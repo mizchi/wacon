@@ -260,7 +260,7 @@ pub fn Cpu::step(self : Cpu) -> Bool {
 /// Run until halted
 pub fn Cpu::run(self : Cpu) -> Unit {
   for ;; {
-    if not(self.step()) {
+    if !(self.step()) {
       break
     }
   }
@@ -271,7 +271,7 @@ pub fn Cpu::run(self : Cpu) -> Unit {
 pub fn Cpu::run_limit(self : Cpu, max_steps : Int) -> Int {
   let mut steps = 0
   for ;; {
-    if steps >= max_steps || not(self.step()) {
+    if steps >= max_steps || !(self.step()) {
       break
     }
     steps += 1
